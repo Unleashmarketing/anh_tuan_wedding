@@ -975,6 +975,34 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
         
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animated elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll(
+                '.section-title, .intro-heading, .intro-text, .location-card, ' +
+                '.dresscode-box, .trauzeuge-card, .rsvp-form'
+            );
+            
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+        
         // Form Submission
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
