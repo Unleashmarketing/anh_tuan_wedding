@@ -32,19 +32,26 @@
             position: relative;
         }
         
-        /* --- ÄNDERUNG: Section Divider CSS --- */
-        /* Das Bild wird nun absolut am unteren Rand der Sektion positioniert */
+        /* --- CSS für Glitzer-Divider --- */
         .section-divider {
             width: 100%;
             height: auto;
             display: block;
-            position: absolute; /* Wichtig: Absolute Positionierung */
-            bottom: 0; /* Klebt am unteren Rand */
+            position: absolute;
             left: 0;
             z-index: 5;
             pointer-events: none;
-            /* Optional: Falls kleine Lücken entstehen, kann man das Bild minimal nach unten schieben */
-            /* transform: translateY(1px); */ 
+        }
+
+        /* Klasse für Glitzer am Ende (unten) */
+        .divider-bottom {
+            bottom: -1px; /* -1px verhindert weiße Blitzer */
+        }
+
+        /* Klasse für Glitzer am Anfang (oben, gedreht) */
+        .divider-top {
+            top: -1px;
+            transform: rotate(180deg);
         }
 
         /* Animations */
@@ -88,7 +95,6 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
-            /* Hero braucht kein extra padding unten, da das Bild hier anders wirkt */
         }
         
         .hero-image {
@@ -136,6 +142,14 @@
             display: inline-block;
             margin: 0 0.5rem;
             color: var(--gold);
+        }
+
+        /* Spezifische Klasse für Anh Tuan in Dunkelblau */
+        .groom-name {
+            color: var(--azure);
+            font-weight: 400;
+            /* Da der Hintergrund dunkel ist, hilft ein kleiner Glow/Schatten für Lesbarkeit */
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         .hero-date {
@@ -200,11 +214,10 @@
             z-index: 1;
         }
         
-        /* --- ÄNDERUNG: Section Styling --- */
+        /* Section Styling */
         section {
-            /* Padding unten erhöht (von 6rem auf 8rem oder mehr), 
-               damit Platz für das absolute Glitzerbild ist */
-            padding: 6rem 0 9rem 0; 
+            /* Padding oben und unten erhöht für Glitzer-Platz */
+            padding: 8rem 0 9rem 0; 
             position: relative;
             z-index: 1;
         }
@@ -263,8 +276,7 @@
         
         /* Intro Section */
         .intro-section {
-            /* Spezifisches Padding für Intro anpassen */
-            padding: 5rem 0 8rem 0;
+            padding: 8rem 0 8rem 0;
             text-align: center;
         }
         
@@ -373,20 +385,23 @@
             padding-left: 0;
         }
         
+        /* Voll farbige Icons */
         .timeline-icon {
             width: 80px;
             height: 80px;
-            background: #1a3a52; 
-            border: 2px solid #ffb3c6;
+            /* Hintergrund Pink (voll farbig) */
+            background: var(--flamingo); 
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: #ffb3c6;
+            /* Icon Farbe Blau für Kontrast */
+            color: var(--azure); 
             position: relative;
             z-index: 2;
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         
         .timeline-spacer {
@@ -758,7 +773,6 @@
                 padding: 2rem;
             }
             
-            /* --- ÄNDERUNG: Responsive Padding --- */
             section {
                 padding: 4rem 0 7rem 0; /* Auch mobil mehr Platz unten */
             }
@@ -775,7 +789,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-names">
-                Ngọc Anh <span class="ampersand">&</span> Anh Tuấn
+                Ngọc Anh <span class="ampersand">&</span> <span class="groom-name">Anh Tuấn</span>
             </h1>
             <p class="hero-date">20. Juni 2026</p>
 
@@ -801,20 +815,22 @@
                 </div>
             </div>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <section class="intro-section bg-pink">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
         <div class="container">
             <p class="intro-heading">Ein himmlisches Paar</p>
             <p class="intro-text">
                 Wir freuen uns riesig, euch zu unserer Hochzeit am <strong>20. Juni 2026</strong> einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.
             </p>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <section id="ablauf" class="bg-blue">
-        <img style="transform: rotate(180deg);top: 0;" src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
         <div class="container">
             <h2 class="section-title">Ablauf des Tages</h2>
             <div class="timeline">
@@ -853,10 +869,11 @@
                 </div>
             </div>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <section id="location" class="bg-pink">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
         <div class="container">
             <h2 class="section-title">Location</h2>
             <div class="location-card">
@@ -876,27 +893,29 @@
                 </div>
             </div>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <section id="dresscode" class="bg-blue">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
         <div class="container">
             <h2 class="section-title">Dresscode</h2>
             <div class="dresscode-box">
                 <h3>Der Dresscode ist festlich elegant – aber das Wichtigste ist, dass ihr euch wohlfühlt! Falls ihr euch farblich anpassen möchtet, ist hier unsere Palette:</h3>
                 
                 <div class="color-palette">
-                    <div class="color-swatch" style="background-color: #1a3a52;" title="Navy Blue"></div>
+                    <div class="color-swatch" style="background-color: #FAF6F0;" title="Creme"></div>
                     <div class="color-swatch" style="background-color: #ffb3c6;" title="Soft Pink"></div>
                     <div class="color-swatch" style="background-color: #2C5F8D;" title="Azure"></div>
                     <div class="color-swatch" style="background-color: #D4AF37;" title="Gold"></div>
                 </div>
             </div>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <section id="trauzeugen" class="bg-pink">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
         <div class="container">
             <h2 class="section-title">Unsere Trauzeugen</h2>
             <div class="trauzeugen-grid">
@@ -922,10 +941,11 @@
                 </div>
             </div>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <section id="rsvp" class="bg-blue">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
         <div class="container">
             <h2 class="section-title">RSVP</h2>
             <form class="rsvp-form" id="rsvpForm">
@@ -969,7 +989,7 @@
                 <button type="submit" class="submit-btn">Absenden</button>
             </form>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
     </section>
 
     <footer class="bg-pink">
