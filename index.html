@@ -14,7 +14,7 @@
             --flamingo: #FF6B9D;
             --dark-text: #2C2C2C;
             --light-text: #666;
-            --gold: #D4AF37; /* Neuer Goldton */
+            --gold: #D4AF37;
         }
         
         * {
@@ -32,15 +32,19 @@
             position: relative;
         }
         
-        /* Utility: Divider Image */
+        /* --- ÄNDERUNG: Section Divider CSS --- */
+        /* Das Bild wird nun absolut am unteren Rand der Sektion positioniert */
         .section-divider {
             width: 100%;
             height: auto;
             display: block;
-            margin: -2px 0; /* Negativer Margin verhindert weiße Linien */
-            position: relative;
+            position: absolute; /* Wichtig: Absolute Positionierung */
+            bottom: 0; /* Klebt am unteren Rand */
+            left: 0;
             z-index: 5;
-            pointer-events: none; /* Klicks gehen durch */
+            pointer-events: none;
+            /* Optional: Falls kleine Lücken entstehen, kann man das Bild minimal nach unten schieben */
+            /* transform: translateY(1px); */ 
         }
 
         /* Animations */
@@ -84,6 +88,7 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
+            /* Hero braucht kein extra padding unten, da das Bild hier anders wirkt */
         }
         
         .hero-image {
@@ -119,22 +124,20 @@
             font-size: clamp(3rem, 8vw, 7rem);
             font-weight: 300;
             letter-spacing: 0.05em;
-            margin-bottom: 0.5rem; /* Reduziert für das Datum */
+            margin-bottom: 0.5rem;
             text-shadow: none;
             animation: fadeIn 1.5s ease-out forwards;
             opacity: 0;
         }
         
-        /* Gold Ampersand */
         .ampersand {
             font-style: italic;
             font-weight: 400;
             display: inline-block;
             margin: 0 0.5rem;
-            color: var(--gold); /* Goldene Farbe */
+            color: var(--gold);
         }
 
-        /* Hero Date Style */
         .hero-date {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
@@ -197,9 +200,11 @@
             z-index: 1;
         }
         
-        /* Section Styling */
+        /* --- ÄNDERUNG: Section Styling --- */
         section {
-            padding: 6rem 0;
+            /* Padding unten erhöht (von 6rem auf 8rem oder mehr), 
+               damit Platz für das absolute Glitzerbild ist */
+            padding: 6rem 0 9rem 0; 
             position: relative;
             z-index: 1;
         }
@@ -258,7 +263,8 @@
         
         /* Intro Section */
         .intro-section {
-            padding: 5rem 0;
+            /* Spezifisches Padding für Intro anpassen */
+            padding: 5rem 0 8rem 0;
             text-align: center;
         }
         
@@ -301,7 +307,6 @@
             padding: 4rem 0;
         }
         
-        /* Centered vertical line */
         .timeline::before {
             content: '';
             position: absolute;
@@ -311,7 +316,7 @@
             bottom: 0;
             width: 2px;
             background: rgba(255, 179, 198, 0.3);
-            z-index: 1; /* Linie liegt hinter dem Icon */
+            z-index: 1;
         }
         
         .timeline-item {
@@ -340,7 +345,6 @@
             }
         }
         
-        /* Alternate left and right */
         .timeline-item:nth-child(odd) .timeline-content-wrapper {
             grid-column: 1;
             text-align: right;
@@ -369,13 +373,11 @@
             padding-left: 0;
         }
         
-        /* Icon circle */
         .timeline-icon {
             width: 80px;
             height: 80px;
-            /* Hintergrund geändert auf Dunkelblau (Section-Farbe), damit die Linie verdeckt wird */
             background: #1a3a52; 
-            border: 2px solid #ffb3c6; /* Optional: Rand hinzugefügt für besseren Kontrast */
+            border: 2px solid #ffb3c6;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -383,7 +385,7 @@
             font-size: 2rem;
             color: #ffb3c6;
             position: relative;
-            z-index: 2; /* Liegt ÜBER der Linie */
+            z-index: 2;
             flex-shrink: 0;
         }
         
@@ -465,7 +467,6 @@
             opacity: 0;
         }
         
-        /* Hexagon container */
         .location-hexagon {
             width: 300px;
             height: 260px;
@@ -536,7 +537,6 @@
             font-style: italic;
         }
         
-        /* New Color Palette Styles */
         .color-palette {
             display: flex;
             justify-content: center;
@@ -729,6 +729,7 @@
             text-align: center;
             padding: 3rem 0;
             font-size: 0.9rem;
+            position: relative; /* Für das Glitzerbild im Footer */
         }
         
         footer .hearts {
@@ -757,8 +758,13 @@
                 padding: 2rem;
             }
             
+            /* --- ÄNDERUNG: Responsive Padding --- */
             section {
-                padding: 4rem 0;
+                padding: 4rem 0 7rem 0; /* Auch mobil mehr Platz unten */
+            }
+            
+            .intro-section {
+                 padding: 4rem 0 6rem 0;
             }
         }
     </style>
@@ -795,9 +801,8 @@
                 </div>
             </div>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
-
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
 
     <section class="intro-section bg-pink">
         <div class="container">
@@ -806,9 +811,8 @@
                 Wir freuen uns riesig, euch zu unserer Hochzeit am <strong>20. Juni 2026</strong> einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.
             </p>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
-
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
 
     <section id="ablauf" class="bg-blue">
         <div class="container">
@@ -849,9 +853,8 @@
                 </div>
             </div>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
-
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
 
     <section id="location" class="bg-pink">
         <div class="container">
@@ -873,9 +876,8 @@
                 </div>
             </div>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
-
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
 
     <section id="dresscode" class="bg-blue">
         <div class="container">
@@ -891,9 +893,8 @@
                 </div>
             </div>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
-
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
 
     <section id="trauzeugen" class="bg-pink">
         <div class="container">
@@ -921,9 +922,8 @@
                 </div>
             </div>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
-
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
 
     <section id="rsvp" class="bg-blue">
         <div class="container">
@@ -969,6 +969,7 @@
                 <button type="submit" class="submit-btn">Absenden</button>
             </form>
         </div>
+        <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
     </section>
 
     <footer class="bg-pink">
