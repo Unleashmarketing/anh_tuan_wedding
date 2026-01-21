@@ -14,6 +14,7 @@
             --flamingo: #FF6B9D;
             --dark-text: #2C2C2C;
             --light-text: #666;
+            --gold: #D4AF37; /* Neuer Goldton */
         }
         
         * {
@@ -31,6 +32,17 @@
             position: relative;
         }
         
+        /* Utility: Divider Image */
+        .section-divider {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: -2px 0; /* Negativer Margin verhindert weiße Linien */
+            position: relative;
+            z-index: 5;
+            pointer-events: none; /* Klicks gehen durch */
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -102,38 +114,40 @@
             animation: fadeInUp 1.5s ease-out;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
         .hero-names {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(3rem, 8vw, 7rem);
             font-weight: 300;
             letter-spacing: 0.05em;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem; /* Reduziert für das Datum */
             text-shadow: none;
             animation: fadeIn 1.5s ease-out forwards;
             opacity: 0;
         }
         
+        /* Gold Ampersand */
         .ampersand {
             font-style: italic;
             font-weight: 400;
             display: inline-block;
             margin: 0 0.5rem;
+            color: var(--gold); /* Goldene Farbe */
+        }
+
+        /* Hero Date Style */
+        .hero-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--flamingo);
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
         }
         
         .countdown-container {
-            margin-top: 3rem;
+            margin-top: 2rem;
             animation: fadeInUp 1s ease-out forwards;
             animation-delay: 0.5s;
             opacity: 0;
@@ -231,11 +245,6 @@
             opacity: 0;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
         .section-title::after {
             content: '';
             position: absolute;
@@ -302,6 +311,7 @@
             bottom: 0;
             width: 2px;
             background: rgba(255, 179, 198, 0.3);
+            z-index: 1; /* Linie liegt hinter dem Icon */
         }
         
         .timeline-item {
@@ -318,8 +328,6 @@
         .timeline-item:nth-child(1) { animation-delay: 0.1s; }
         .timeline-item:nth-child(2) { animation-delay: 0.2s; }
         .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
         
         @keyframes slideIn {
             from {
@@ -365,7 +373,9 @@
         .timeline-icon {
             width: 80px;
             height: 80px;
-            background: rgba(255, 179, 198, 0.4);
+            /* Hintergrund geändert auf Dunkelblau (Section-Farbe), damit die Linie verdeckt wird */
+            background: #1a3a52; 
+            border: 2px solid #ffb3c6; /* Optional: Rand hinzugefügt für besseren Kontrast */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -373,7 +383,7 @@
             font-size: 2rem;
             color: #ffb3c6;
             position: relative;
-            z-index: 2;
+            z-index: 2; /* Liegt ÜBER der Linie */
             flex-shrink: 0;
         }
         
@@ -526,10 +536,25 @@
             font-style: italic;
         }
         
-        .dresscode-colors {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
+        /* New Color Palette Styles */
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
         }
         
         /* Trauzeugen */
@@ -739,7 +764,6 @@
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
     <section class="hero bg-blue">
         <img src="images/Tuan -Anh2403.JPG" alt="Wedding" class="hero-image">
         <div class="hero-overlay"></div>
@@ -747,6 +771,8 @@
             <h1 class="hero-names">
                 Ngọc Anh <span class="ampersand">&</span> Anh Tuấn
             </h1>
+            <p class="hero-date">20. Juni 2026</p>
+
             <div class="countdown-container">
                 <p class="countdown-label">Wir heiraten in</p>
                 <div class="countdown" id="countdown">
@@ -771,7 +797,8 @@
         </div>
     </section>
 
-    <!-- Intro Section -->
+    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+
     <section class="intro-section bg-pink">
         <div class="container">
             <p class="intro-heading">Ein himmlisches Paar</p>
@@ -781,7 +808,8 @@
         </div>
     </section>
 
-    <!-- Ablauf Section -->
+    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+
     <section id="ablauf" class="bg-blue">
         <div class="container">
             <h2 class="section-title">Ablauf des Tages</h2>
@@ -796,43 +824,35 @@
                     </div>
                     <div class="timeline-spacer"></div>
                 </div>
+                
                 <div class="timeline-item">
                     <div class="timeline-spacer"></div>
                     <div class="timeline-icon">
-                        <img src="images/Champagne.png" alt="Sektempfang" style="width: 40px; height: 40px;">
+                        <img src="images/Dinner.png" alt="Dinner" style="width: 40px; height: 40px;">
                     </div>
-                    <div class="timeline-content-wrapper">
-                        <h3>Sektempfang</h3>
-                        <p class="timeline-time">im Anschluss an die Zeremonie</p>
-                        <p>Gratulationen und erste Glückwünsche bei einem Glas Sekt</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
                     <div class="timeline-content-wrapper">
                         <h3>Hochzeitsdinner</h3>
                         <p class="timeline-time">Empfang ab 18:00 Uhr · Dinner beginnt um 18:30 Uhr</p>
                     </div>
-                    <div class="timeline-icon">
-                        <img src="images/Dinner.png" alt="Dinner" style="width: 40px; height: 40px;">
-                    </div>
-                    <div class="timeline-spacer"></div>
                 </div>
+
                 <div class="timeline-item">
-                    <div class="timeline-spacer"></div>
-                    <div class="timeline-icon">
-                        <img src="images/Music.png" alt="Party" style="width: 40px; height: 40px;">
-                    </div>
                     <div class="timeline-content-wrapper">
                         <h3>Party</h3>
                         <p class="timeline-time">ab 21:00 Uhr</p>
                         <p>Lasst uns gemeinsam feiern und tanzen!</p>
                     </div>
+                    <div class="timeline-icon">
+                        <img src="images/Music.png" alt="Party" style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="timeline-spacer"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Location Section -->
+    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+
     <section id="location" class="bg-pink">
         <div class="container">
             <h2 class="section-title">Location</h2>
@@ -841,7 +861,7 @@
                     <img src="images/Location.webp" alt="Zum wilden Esel" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="location-info">
-                    <h3 class="location-name">Zum wilden Esel</h3>
+                    <h3 class="location-name">Zum Wilden Esel</h3>
                     <p class="location-address">
                         <a href="https://www.google.com/maps/search/?api=1&query=Frankfurter+Str.+76+65439+Flörsheim+am+Main" target="_blank" style="color: #1a3a52; text-decoration: none; transition: opacity 0.3s;">
                             Frankfurter Str. 76<br>65439 Flörsheim am Main
@@ -855,18 +875,26 @@
         </div>
     </section>
 
-    <!-- Dresscode Section -->
+    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+
     <section id="dresscode" class="bg-blue">
         <div class="container">
             <h2 class="section-title">Dresscode</h2>
             <div class="dresscode-box">
-                <h3>Der Dresscode ist festlich elegant – aber das Wichtigste ist, dass ihr euch wohlfühlt! Aber wenn du nicht weißt, was du anziehen sollst:</h3>
-                <p class="dresscode-colors">Blau / Rosa</p>
+                <h3>Der Dresscode ist festlich elegant – aber das Wichtigste ist, dass ihr euch wohlfühlt! Falls ihr euch farblich anpassen möchtet, ist hier unsere Palette:</h3>
+                
+                <div class="color-palette">
+                    <div class="color-swatch" style="background-color: #1a3a52;" title="Navy Blue"></div>
+                    <div class="color-swatch" style="background-color: #ffb3c6;" title="Soft Pink"></div>
+                    <div class="color-swatch" style="background-color: #2C5F8D;" title="Azure"></div>
+                    <div class="color-swatch" style="background-color: #D4AF37;" title="Gold"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Trauzeugen Section -->
+    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+
     <section id="trauzeugen" class="bg-pink">
         <div class="container">
             <h2 class="section-title">Unsere Trauzeugen</h2>
@@ -874,28 +902,29 @@
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">M</div>
                     <h3 class="trauzeuge-name">Maria Schmidt</h3>
-                    <p class="trauzeuge-email"><a href="/cdn-cgi/l/email-protection#5835392a3139183d20393528343d763b3735"><span class="__cf_email__" data-cfemail="ee838f9c878fae8b968f839e828bc08d8183">[email&#160;protected]</span></a></p>
+                    <p class="trauzeuge-email"><a href="mailto:maria@example.com">maria@example.com</a></p>
                 </div>
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">L</div>
                     <h3 class="trauzeuge-name">Lukas Müller</h3>
-                    <p class="trauzeuge-email"><a href="/cdn-cgi/l/email-protection#b7dbc2dcd6c4f7d2cfd6dac7dbd299d4d8da"><span class="__cf_email__" data-cfemail="670b120c061427021f060a170b024904080a">[email&#160;protected]</span></a></p>
+                    <p class="trauzeuge-email"><a href="mailto:lukas@example.com">lukas@example.com</a></p>
                 </div>
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">S</div>
                     <h3 class="trauzeuge-name">Sophie Weber</h3>
-                    <p class="trauzeuge-email"><a href="/cdn-cgi/l/email-protection#45362a352d2c2005203d24283529206b262a28"><span class="__cf_email__" data-cfemail="c1b2aeb1a9a8a481a4b9a0acb1ada4efa2aeac">[email&#160;protected]</span></a></p>
+                    <p class="trauzeuge-email"><a href="mailto:sophie@example.com">sophie@example.com</a></p>
                 </div>
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">T</div>
                     <h3 class="trauzeuge-name">Thomas Fischer</h3>
-                    <p class="trauzeuge-email"><a href="/cdn-cgi/l/email-protection#0e7a6661636f7d4e6b766f637e626b206d6163"><span class="__cf_email__" data-cfemail="3044585f5d5143705548515d405c551e535f5d">[email&#160;protected]</span></a></p>
+                    <p class="trauzeuge-email"><a href="mailto:thomas@example.com">thomas@example.com</a></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RSVP Section -->
+    <img src="images/glitzer.png" alt="Glitzer" class="section-divider">
+
     <section id="rsvp" class="bg-blue">
         <div class="container">
             <h2 class="section-title">RSVP</h2>
@@ -942,7 +971,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-pink">
         <div class="hearts">♥ ♥ ♥</div>
         <p>Wir freuen uns auf euch!</p>
@@ -994,7 +1022,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const animatedElements = document.querySelectorAll(
                 '.section-title, .intro-heading, .intro-text, .location-card, ' +
-                '.dresscode-box, .trauzeuge-card, .rsvp-form'
+                '.dresscode-box, .trauzeuge-card, .rsvp-form, .hero-date'
             );
             
             animatedElements.forEach(el => {
