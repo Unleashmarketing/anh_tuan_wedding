@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. SCHRIFTART EINBINDEN --- */
+        /* --- 1. NEUE SCHRIFTART EINBINDEN --- */
         @font-face {
-            font-family: 'BethanyAvanue';
-            /* Pfad zur Datei im selben Ordner */
-            src: url('BethanyAvanue.otf') format('opentype');
+            font-family: 'BohemeFloral'; /* Name, den wir im CSS verwenden */
+            /* Dateiname exakt wie von dir angegeben */
+            src: url('DFVN Boheme Floral.otf') format('opentype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -57,7 +57,7 @@
 
         /* Klasse für Glitzer am Ende (unten) */
         .divider-bottom {
-            bottom: -1px; /* -1px verhindert weiße Blitzer */
+            bottom: -1px; 
         }
 
         /* Klasse für Glitzer am Anfang (oben, gedreht) */
@@ -139,10 +139,10 @@
         
         .hero-names {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: normal; /* Oft sehen Custom Fonts besser ohne Bold aus */
-            letter-spacing: 0.05em;
+            font-weight: normal; 
+            letter-spacing: 0.02em; /* Etwas angepasst für Schreibschriften */
             margin-bottom: 0.5rem;
             text-shadow: none;
             animation: fadeIn 1.5s ease-out forwards;
@@ -157,18 +157,17 @@
             color: var(--gold);
         }
 
-        /* Spezifische Klasse für Anh Tuan in Dunkelblau */
         .groom-name {
             font-weight: 400;
         }
 
         .hero-date {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--flamingo);
             margin-bottom: 3rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             animation: fadeInUp 1s ease-out forwards;
             animation-delay: 0.3s;
             opacity: 0;
@@ -202,7 +201,7 @@
         
         .countdown-number {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: normal;
             line-height: 1;
@@ -228,7 +227,6 @@
         
         /* Section Styling */
         section {
-            /* Padding oben und unten erhöht für Glitzer-Platz */
             padding: 8rem 0 9rem 0; 
             position: relative;
             z-index: 1;
@@ -265,7 +263,7 @@
         
         .section-title {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: normal;
             text-align: center;
@@ -305,7 +303,7 @@
         
         .intro-text {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: clamp(1.8rem, 4vw, 3rem);
             font-weight: normal;
             line-height: 1.5;
@@ -399,18 +397,15 @@
             padding-left: 0;
         }
         
-        /* Voll farbige Icons */
         .timeline-icon {
             width: 80px;
             height: 80px;
-            /* Hintergrund Pink (voll farbig) */
             background: #ffb3c6; 
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            /* Icon Farbe Blau für Kontrast */
             color: var(--azure); 
             position: relative;
             z-index: 2;
@@ -432,7 +427,7 @@
         
         .timeline-content-wrapper h3 {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: 1.8rem;
             font-weight: normal;
             color: #ffb3c6;
@@ -518,7 +513,7 @@
         
         .location-name {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: 2.5rem;
             font-weight: normal;
             color: #1a3a52;
@@ -562,7 +557,7 @@
         
         .dresscode-box h3 {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: 2rem;
             margin-bottom: 1.5rem;
             font-weight: normal;
@@ -637,13 +632,13 @@
             font-size: 4.5rem;
             color: #ffb3c6;
             /* HIER GEÄNDERT: Neue Schrift für die Initialen */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             transition: box-shadow 0.3s ease;
         }
         
         .trauzeuge-name {
             /* HIER GEÄNDERT: Neue Schrift */
-            font-family: 'BethanyAvanue', serif;
+            font-family: 'BohemeFloral', serif;
             font-size: 1.6rem;
             font-weight: normal;
             margin-bottom: 0.5rem;
@@ -763,7 +758,7 @@
             text-align: center;
             padding: 3rem 0;
             font-size: 0.9rem;
-            position: relative; /* Für das Glitzerbild im Footer */
+            position: relative; 
         }
         
         footer .hearts {
@@ -793,7 +788,7 @@
             }
             
             section {
-                padding: 4rem 0 7rem 0; /* Auch mobil mehr Platz unten */
+                padding: 4rem 0 7rem 0; 
             }
             
             .intro-section {
