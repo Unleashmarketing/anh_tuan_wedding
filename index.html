@@ -6,8 +6,19 @@
     <title>Ngọc Anh & Anh Tuấn | 20. Juni 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- 1. SCHRIFTART EINBINDEN --- */
+        @font-face {
+            font-family: 'BethanyAvanue';
+            /* Pfad zur Datei im selben Ordner */
+            src: url('BethanyAvanue.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
             --cream: #FAF6F0;
             --azure: #2C5F8D;
@@ -24,6 +35,7 @@
         }
         
         body {
+            /* Fließtext bleibt Montserrat */
             font-family: 'Montserrat', sans-serif;
             background: #1a3a52;
             color: var(--dark-text);
@@ -126,9 +138,10 @@
         }
         
         .hero-names {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 300;
+            font-weight: normal; /* Oft sehen Custom Fonts besser ohne Bold aus */
             letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
             text-shadow: none;
@@ -150,7 +163,8 @@
         }
 
         .hero-date {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--flamingo);
             margin-bottom: 3rem;
@@ -187,9 +201,10 @@
         }
         
         .countdown-number {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 600;
+            font-weight: normal;
             line-height: 1;
             display: block;
         }
@@ -249,9 +264,10 @@
         }
         
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
+            font-weight: normal;
             text-align: center;
             margin-bottom: 3rem;
             position: relative;
@@ -288,9 +304,10 @@
         }
         
         .intro-text {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 300;
+            font-weight: normal;
             line-height: 1.5;
             max-width: 900px;
             margin: 0 auto;
@@ -414,9 +431,10 @@
         }
         
         .timeline-content-wrapper h3 {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: 1.8rem;
-            font-weight: 600;
+            font-weight: normal;
             color: #ffb3c6;
             margin-bottom: 0.5rem;
         }
@@ -499,9 +517,10 @@
         }
         
         .location-name {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: 2.5rem;
-            font-weight: 600;
+            font-weight: normal;
             color: #1a3a52;
             margin-bottom: 2rem;
         }
@@ -542,10 +561,11 @@
         }
         
         .dresscode-box h3 {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            font-weight: 300;
+            font-weight: normal;
             font-style: italic;
         }
         
@@ -616,14 +636,16 @@
             justify-content: center;
             font-size: 4.5rem;
             color: #ffb3c6;
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift für die Initialen */
+            font-family: 'BethanyAvanue', serif;
             transition: box-shadow 0.3s ease;
         }
         
         .trauzeuge-name {
-            font-family: 'Cormorant Garamond', serif;
+            /* HIER GEÄNDERT: Neue Schrift */
+            font-family: 'BethanyAvanue', serif;
             font-size: 1.6rem;
-            font-weight: 600;
+            font-weight: normal;
             margin-bottom: 0.5rem;
             color: #1a3a52;
         }
