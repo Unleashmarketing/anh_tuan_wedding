@@ -6,8 +6,17 @@
     <title>Ngọc Anh & Anh Tuấn | 20. Juni 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* --- Eigene Schriftart einbinden --- */
+        @font-face {
+            font-family: 'IndulgeScript';
+            src: url('DFVN Indulge Script.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
             --cream: #FAF6F0;
             --azure: #2C5F8D;
@@ -32,7 +41,12 @@
             position: relative;
         }
         
-        /* --- CSS für Glitzer-Divider --- */
+        /* --- Überschriften nutzen die neue Schrift --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'IndulgeScript', cursive;
+            font-weight: normal;
+        }
+
         .section-divider {
             width: 100%;
             height: auto;
@@ -43,47 +57,23 @@
             pointer-events: none;
         }
 
-        /* Klasse für Glitzer am Ende (unten) */
-        .divider-bottom {
-            bottom: -1px; /* -1px verhindert weiße Blitzer */
-        }
-
-        /* Klasse für Glitzer am Anfang (oben, gedreht) */
-        .divider-top {
-            top: -1px;
-            transform: rotate(180deg);
-        }
+        .divider-bottom { bottom: -1px; }
+        .divider-top { top: -1px; transform: rotate(180deg); }
 
         /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         
         /* Hero Section */
@@ -99,20 +89,14 @@
         
         .hero-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             z-index: 0;
         }
         
         .hero-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(26, 58, 82, 0.7);
             z-index: 1;
         }
@@ -126,10 +110,10 @@
         }
         
         .hero-names {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 300;
-            letter-spacing: 0.05em;
+            font-family: 'IndulgeScript', cursive;
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            font-weight: normal;
+            letter-spacing: 0.02em;
             margin-bottom: 0.5rem;
             text-shadow: none;
             animation: fadeIn 1.5s ease-out forwards;
@@ -137,27 +121,23 @@
         }
         
         .ampersand {
-            font-style: italic;
+            font-style: normal;
             font-weight: 400;
             display: inline-block;
             margin: 0 0.5rem;
             color: var(--gold);
         }
 
-        /* Spezifische Klasse für Anh Tuan in Dunkelblau */
         .groom-name {
             color: var(--azure);
-            font-weight: 400;
-            /* Da der Hintergrund dunkel ist, hilft ein kleiner Glow/Schatten für Lesbarkeit */
             text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         .hero-date {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-family: 'IndulgeScript', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             color: var(--flamingo);
             margin-bottom: 3rem;
-            letter-spacing: 0.1em;
             animation: fadeInUp 1s ease-out forwards;
             animation-delay: 0.3s;
             opacity: 0;
@@ -179,20 +159,15 @@
         }
         
         .countdown {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
         }
         
-        .countdown-item {
-            text-align: center;
-        }
+        .countdown-item { text-align: center; }
         
         .countdown-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 600;
+            font-family: 'IndulgeScript', cursive;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: normal;
             line-height: 1;
             display: block;
         }
@@ -214,47 +189,28 @@
             z-index: 1;
         }
         
-        /* Section Styling */
         section {
-            /* Padding oben und unten erhöht für Glitzer-Platz */
             padding: 8rem 0 9rem 0; 
             position: relative;
             z-index: 1;
         }
         
-        /* Blue sections */
-        .bg-blue {
-            background: #1a3a52;
-        }
-        
-        .bg-blue .section-title,
-        .bg-blue .intro-heading,
-        .bg-blue .intro-text,
-        .bg-blue .intro-details,
-        .bg-blue .countdown-label,
-        .bg-blue .countdown-number,
-        .bg-blue .countdown-text,
-        .bg-blue .hero-names,
-        .bg-blue footer {
+        .bg-blue { background: #1a3a52; }
+        .bg-blue .section-title, .bg-blue .intro-heading, .bg-blue .intro-text,
+        .bg-blue .countdown-label, .bg-blue .countdown-number, .bg-blue .countdown-text,
+        .bg-blue .hero-names, .bg-blue footer {
             color: #ffb3c6;
         }
         
-        /* Pink sections */
-        .bg-pink {
-            background: #ffb3c6;
-        }
-        
-        .bg-pink .section-title,
-        .bg-pink .intro-heading,
-        .bg-pink .intro-text,
-        .bg-pink .intro-details {
+        .bg-pink { background: #ffb3c6; }
+        .bg-pink .section-title, .bg-pink .intro-heading, .bg-pink .intro-text {
             color: #1a3a52;
         }
         
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
+            font-family: 'IndulgeScript', cursive;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: normal;
             text-align: center;
             margin-bottom: 3rem;
             position: relative;
@@ -275,11 +231,7 @@
         }
         
         /* Intro Section */
-        .intro-section {
-            padding: 8rem 0 8rem 0;
-            text-align: center;
-        }
-        
+        .intro-section { padding: 8rem 0 8rem 0; text-align: center; }
         .intro-heading {
             font-size: 1rem;
             letter-spacing: 0.2em;
@@ -291,24 +243,15 @@
         }
         
         .intro-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 300;
-            line-height: 1.5;
+            font-family: 'IndulgeScript', cursive;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: normal;
+            line-height: 1.2;
             max-width: 900px;
             margin: 0 auto;
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.5s;
             opacity: 0;
-        }
-        
-        .intro-details {
-            margin-top: 2.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
         /* Timeline */
@@ -324,9 +267,7 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 2px;
+            top: 0; bottom: 0; width: 2px;
             background: rgba(255, 179, 198, 0.3);
             z-index: 1;
         }
@@ -347,56 +288,21 @@
         .timeline-item:nth-child(3) { animation-delay: 0.3s; }
         
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .timeline-item:nth-child(odd) .timeline-content-wrapper {
-            grid-column: 1;
-            text-align: right;
-            padding-right: 0;
-        }
+        .timeline-item:nth-child(odd) .timeline-content-wrapper { grid-column: 1; text-align: right; }
+        .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 3; text-align: left; }
         
-        .timeline-item:nth-child(odd) .timeline-icon {
-            grid-column: 2;
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-spacer {
-            grid-column: 3;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-spacer {
-            grid-column: 1;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-icon {
-            grid-column: 2;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-content-wrapper {
-            grid-column: 3;
-            text-align: left;
-            padding-left: 0;
-        }
-        
-        /* Voll farbige Icons */
         .timeline-icon {
-            width: 80px;
-            height: 80px;
-            /* Hintergrund Pink (voll farbig) */
+            width: 80px; height: 80px;
             background: var(--flamingo); 
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            /* Icon Farbe Blau für Kontrast */
             color: var(--azure); 
             position: relative;
             z-index: 2;
@@ -404,22 +310,10 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         
-        .timeline-spacer {
-            width: 100%;
-        }
-        
-        .timeline-date {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: #ffb3c6;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
-        
         .timeline-content-wrapper h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-family: 'IndulgeScript', cursive;
+            font-size: 2.2rem;
+            font-weight: normal;
             color: #ffb3c6;
             margin-bottom: 0.5rem;
         }
@@ -429,44 +323,6 @@
             font-weight: 500;
             color: #ffb3c6;
             margin-bottom: 0.5rem;
-        }
-        
-        .timeline-content-wrapper p {
-            color: #ffb3c6;
-            font-size: 0.95rem;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        @media (max-width: 768px) {
-            .timeline {
-                padding-left: 0;
-            }
-            
-            .timeline::before {
-                left: 40px;
-            }
-            
-            .timeline-item {
-                grid-template-columns: auto 1fr;
-                gap: 1.5rem;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-content-wrapper,
-            .timeline-item:nth-child(even) .timeline-content-wrapper {
-                grid-column: 2;
-                text-align: left;
-                padding-left: 0;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-icon,
-            .timeline-item:nth-child(even) .timeline-icon {
-                grid-column: 1;
-            }
-            
-            .timeline-spacer {
-                display: none;
-            }
         }
         
         /* Location Section */
@@ -483,28 +339,19 @@
         }
         
         .location-hexagon {
-            width: 300px;
-            height: 260px;
+            width: 300px; height: 260px;
             position: relative;
             overflow: hidden;
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
             background: #1a3a52;
         }
         
-        .location-hexagon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .location-info {
-            text-align: left;
-        }
+        .location-hexagon img { width: 100%; height: 100%; object-fit: cover; }
         
         .location-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
+            font-family: 'IndulgeScript', cursive;
+            font-size: 3rem;
+            font-weight: normal;
             color: #1a3a52;
             margin-bottom: 2rem;
         }
@@ -516,28 +363,12 @@
             font-weight: 400;
         }
         
-        @media (max-width: 768px) {
-            .location-card {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-            
-            .location-hexagon {
-                margin: 0 auto;
-            }
-            
-            .location-info {
-                text-align: center;
-            }
-        }
-        
         /* Dresscode */
         .dresscode-box {
             color: #ffb3c6;
             padding: 3rem;
             text-align: center;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             animation: scaleIn 0.8s ease-out forwards;
             animation-delay: 0.3s;
@@ -545,32 +376,25 @@
         }
         
         .dresscode-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-family: 'IndulgeScript', cursive;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            font-weight: 300;
-            font-style: italic;
+            font-weight: normal;
+            line-height: 1.2;
         }
         
         .color-palette {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            display: flex; justify-content: center; align-items: center;
+            gap: 1.5rem; margin-top: 2rem;
         }
 
         .color-swatch {
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
         }
-
-        .color-swatch:hover {
-            transform: scale(1.1);
-        }
+        .color-swatch:hover { transform: scale(1.1); }
         
         /* Trauzeugen */
         .trauzeugen-grid {
@@ -581,12 +405,6 @@
             margin: 0 auto;
         }
         
-        @media (max-width: 768px) {
-            .trauzeugen-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         .trauzeuge-card {
             padding: 2rem;
             text-align: center;
@@ -595,22 +413,8 @@
             opacity: 0;
         }
         
-        .trauzeuge-card:nth-child(1) { animation-delay: 0.2s; }
-        .trauzeuge-card:nth-child(2) { animation-delay: 0.3s; }
-        .trauzeuge-card:nth-child(3) { animation-delay: 0.4s; }
-        .trauzeuge-card:nth-child(4) { animation-delay: 0.5s; }
-        
-        .trauzeuge-card:hover {
-            transform: translateY(-8px);
-        }
-        
-        .trauzeuge-card:hover .trauzeuge-image {
-            box-shadow: 0 8px 25px rgba(26, 58, 82, 0.3);
-        }
-        
         .trauzeuge-image {
-            width: 160px;
-            height: 160px;
+            width: 160px; height: 160px;
             border-radius: 50%;
             background: #1a3a52;
             margin: 0 auto 1.5rem;
@@ -619,33 +423,22 @@
             justify-content: center;
             font-size: 4.5rem;
             color: #ffb3c6;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'IndulgeScript', cursive;
             transition: box-shadow 0.3s ease;
         }
         
         .trauzeuge-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
+            font-family: 'IndulgeScript', cursive;
+            font-size: 2.2rem;
+            font-weight: normal;
             margin-bottom: 0.5rem;
             color: #1a3a52;
-        }
-        
-        .trauzeuge-email {
-            color: #1a3a52;
-            font-size: 0.95rem;
-            opacity: 0.9;
         }
         
         .trauzeuge-email a {
             color: #1a3a52;
             text-decoration: none;
-            transition: opacity 0.3s ease;
             font-weight: 500;
-        }
-        
-        .trauzeuge-email a:hover {
-            opacity: 0.6;
         }
         
         /* RSVP Form */
@@ -658,66 +451,11 @@
             opacity: 0;
         }
         
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: #ffb3c6;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border: 2px solid rgba(255, 179, 198, 0.3);
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-            background: rgba(255, 255, 255, 0.95);
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ffb3c6;
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        
-        .radio-group {
-            display: flex;
-            gap: 2rem;
-            margin-top: 0.5rem;
-        }
-        
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: #ffb3c6;
-            cursor: pointer;
-        }
-        
-        .radio-option input[type="radio"] {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            accent-color: #ffb3c6;
-        }
-        
-        .radio-option label {
-            cursor: pointer;
-            margin-bottom: 0;
         }
         
         .submit-btn {
@@ -731,55 +469,35 @@
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.05em;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 179, 198, 0.4);
         }
         
         /* Footer */
         footer {
             text-align: center;
             padding: 3rem 0;
-            font-size: 0.9rem;
-            position: relative; /* Für das Glitzerbild im Footer */
         }
         
-        footer .hearts {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        footer p:last-child {
+            font-family: 'IndulgeScript', cursive;
+            font-size: 2rem;
+            margin-top: 0.5rem;
         }
-        
-        .bg-pink footer,
-        .bg-pink footer .hearts {
-            color: #1a3a52;
-        }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
-            .timeline-item {
-                flex-direction: column;
-                gap: 0.5rem;
+            .timeline::before { left: 40px; }
+            .timeline-item { grid-template-columns: auto 1fr; gap: 1.5rem; }
+            .timeline-item:nth-child(odd) .timeline-content-wrapper,
+            .timeline-item:nth-child(even) .timeline-content-wrapper {
+                grid-column: 2; text-align: left;
             }
-            
-            .timeline-time {
-                min-width: auto;
-            }
-            
-            .location-card,
-            .rsvp-form {
-                padding: 2rem;
-            }
-            
-            section {
-                padding: 4rem 0 7rem 0; /* Auch mobil mehr Platz unten */
-            }
-            
-            .intro-section {
-                 padding: 4rem 0 6rem 0;
-            }
+            .timeline-item:nth-child(odd) .timeline-icon,
+            .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
+            .timeline-spacer { display: none; }
+            .location-card { grid-template-columns: 1fr; text-align: center; }
+            .location-hexagon { margin: 0 auto; }
+            .trauzeugen-grid { grid-template-columns: 1fr; }
+            section { padding: 4rem 0 7rem 0; }
         }
     </style>
 </head>
@@ -823,7 +541,7 @@
         <div class="container">
             <p class="intro-heading">Ein himmlisches Paar</p>
             <p class="intro-text">
-                Wir freuen uns riesig, euch zu unserer Hochzeit am <strong>20. Juni 2026</strong> einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.
+                Wir freuen uns riesig, euch zu unserer Hochzeit am 20. Juni 2026 einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.
             </p>
         </div>
         <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
@@ -878,17 +596,14 @@
             <h2 class="section-title">Location</h2>
             <div class="location-card">
                 <div class="location-hexagon">
-                    <img src="images/Location.webp" alt="Zum wilden Esel" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="images/Location.webp" alt="Zum wilden Esel">
                 </div>
                 <div class="location-info">
                     <h3 class="location-name">Zum Wilden Esel</h3>
                     <p class="location-address">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Frankfurter+Str.+76+65439+Flörsheim+am+Main" target="_blank" style="color: #1a3a52; text-decoration: none; transition: opacity 0.3s;">
+                        <a href="https://maps.google.com" target="_blank" style="color: #1a3a52; text-decoration: none;">
                             Frankfurter Str. 76<br>65439 Flörsheim am Main
                         </a>
-                    </p>
-                    <p style="margin-top: 1.5rem; font-size: 1rem; color: #1a3a52; opacity: 0.9;">
-                        Bei Anfahrt mit dem Auto stehen ausreichend Parkmöglichkeiten direkt vor Ort zur Verfügung.
                     </p>
                 </div>
             </div>
@@ -922,22 +637,18 @@
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">M</div>
                     <h3 class="trauzeuge-name">Maria Schmidt</h3>
-                    <p class="trauzeuge-email"><a href="mailto:maria@example.com">maria@example.com</a></p>
                 </div>
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">L</div>
                     <h3 class="trauzeuge-name">Lukas Müller</h3>
-                    <p class="trauzeuge-email"><a href="mailto:lukas@example.com">lukas@example.com</a></p>
                 </div>
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">S</div>
                     <h3 class="trauzeuge-name">Sophie Weber</h3>
-                    <p class="trauzeuge-email"><a href="mailto:sophie@example.com">sophie@example.com</a></p>
                 </div>
                 <div class="trauzeuge-card">
                     <div class="trauzeuge-image">T</div>
                     <h3 class="trauzeuge-name">Thomas Fischer</h3>
-                    <p class="trauzeuge-email"><a href="mailto:thomas@example.com">thomas@example.com</a></p>
                 </div>
             </div>
         </div>
@@ -953,39 +664,6 @@
                     <label for="vorname">Vorname *</label>
                     <input type="text" id="vorname" name="vorname" required>
                 </div>
-                <div class="form-group">
-                    <label for="nachname">Nachname *</label>
-                    <input type="text" id="nachname" name="nachname" required>
-                </div>
-                <div class="form-group">
-                    <label>Zusage *</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="zusageJa" name="zusage" value="ja" required>
-                            <label for="zusageJa">Ja, ich komme</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="zusageNein" name="zusage" value="nein">
-                            <label for="zusageNein">Leider nein</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="gaeste">Anzahl der Gäste *</label>
-                    <input type="number" id="gaeste" name="gaeste" min="1" value="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="namen">Namen der Gäste</label>
-                    <textarea id="namen" name="namen" placeholder="Bitte alle Namen auflisten"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="allergene">Allergene / Unverträglichkeiten</label>
-                    <input type="text" id="allergene" name="allergene" placeholder="Optional">
-                </div>
-                <div class="form-group">
-                    <label for="anmerkungen">Wünsche / Anmerkungen</label>
-                    <textarea id="anmerkungen" name="anmerkungen" placeholder="Optional"></textarea>
-                </div>
                 <button type="submit" class="submit-btn">Absenden</button>
             </form>
         </div>
@@ -999,64 +677,31 @@
     </footer>
 
     <script>
-        // Countdown Timer
+        // Countdown Logic
         const weddingDate = new Date('2026-06-20T15:00:00').getTime();
-        
-        function updateCountdown() {
+        const updateCountdown = () => {
             const now = new Date().getTime();
             const distance = weddingDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
-            
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<p style="font-size: 2rem;">Der große Tag ist da! 🎉</p>';
-            }
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Scroll Animation Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            document.getElementById('days').textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').textContent = Math.floor((distance % (1000 * 60)) / 1000);
         };
-        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Animation Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
-        
-        // Observe all animated elements
-        document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll(
-                '.section-title, .intro-heading, .intro-text, .location-card, ' +
-                '.dresscode-box, .trauzeuge-card, .rsvp-form, .hero-date'
-            );
-            
-            animatedElements.forEach(el => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
-        });
-        
-        // Form Submission
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Vielen Dank für deine Rückmeldung! Wir haben deine Antwort erhalten.');
-            this.reset();
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-title, .intro-text, .location-card, .dresscode-box, .trauzeuge-card, .rsvp-form, .hero-date').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
         });
     </script>
 </body>
