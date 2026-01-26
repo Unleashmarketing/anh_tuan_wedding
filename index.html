@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. DEINE SCHRIFTART FÜR ÜBERSCHRIFTEN --- */
+        /* --- 1. DEINE NEUE SCHRIFTART --- */
         @font-face {
-            font-family: 'BohemeFloral';
+            font-family: 'SweetsHolly';
             /* Dateiname muss exakt so im Ordner liegen */
-            src: url('DFVN Boheme Floral.otf') format('opentype');
+            src: url('sweets-holly.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -35,7 +35,6 @@
         }
         
         body {
-            /* HIER: Standard-Schrift ist Montserrat (gut lesbar) */
             font-family: 'Montserrat', sans-serif;
             background: #1a3a52;
             color: var(--dark-text);
@@ -46,11 +45,10 @@
         
         /* --- Globale Regel für Überschriften --- */
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'BohemeFloral', serif;
+            font-family: 'SweetsHolly', serif;
             font-weight: normal;
         }
 
-        /* --- CSS für Glitzer-Divider --- */
         .section-divider {
             width: 100%;
             height: auto;
@@ -114,9 +112,8 @@
         }
         
         .hero-names {
-            /* Überschrift -> Boheme Floral */
-            font-family: 'BohemeFloral', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
+            font-family: 'SweetsHolly', serif;
+            font-size: clamp(3.5rem, 10vw, 8rem); /* Leicht vergrößert für die Script-Font */
             font-weight: normal;
             letter-spacing: 0.02em;
             margin-bottom: 0.5rem;
@@ -126,19 +123,16 @@
         }
         
         .ampersand {
-            font-style: italic;
+            font-style: normal;
             font-weight: 400;
             display: inline-block;
             margin: 0 0.5rem;
             color: var(--gold);
         }
 
-        .groom-name { font-weight: 400; }
-
         .hero-date {
-            /* Datum als dekoratives Element -> Boheme Floral */
-            font-family: 'BohemeFloral', serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-family: 'SweetsHolly', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             color: var(--flamingo);
             margin-bottom: 3rem;
             letter-spacing: 0.05em;
@@ -155,7 +149,6 @@
         }
         
         .countdown-label {
-            /* Kleiner Text -> Montserrat */
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             letter-spacing: 0.2em;
@@ -171,8 +164,7 @@
         .countdown-item { text-align: center; }
         
         .countdown-number {
-            /* Zahlen -> Boheme Floral (sieht meist gut aus) */
-            font-family: 'BohemeFloral', serif;
+            font-family: 'SweetsHolly', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: normal;
             line-height: 1;
@@ -194,24 +186,21 @@
             position: relative; z-index: 1;
         }
         
-        /* Section Styling */
         section { padding: 8rem 0 9rem 0; position: relative; z-index: 1; }
         
-        /* Blue sections */
+        /* Color Logic */
         .bg-blue { background: #1a3a52; }
         .bg-blue .section-title, .bg-blue .intro-heading, .bg-blue .intro-text, 
         .bg-blue .countdown-label, .bg-blue .countdown-number, 
         .bg-blue .countdown-text, .bg-blue .hero-names, .bg-blue footer { color: #ffb3c6; }
         
-        /* Pink sections */
         .bg-pink { background: #ffb3c6; }
         .bg-pink .section-title, .bg-pink .intro-heading, 
         .bg-pink .intro-text, .bg-pink .intro-details { color: #1a3a52; }
         
         .section-title {
-            /* Sektions-Überschrift -> Boheme Floral */
-            font-family: 'BohemeFloral', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: 'SweetsHolly', serif;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
             font-weight: normal;
             text-align: center;
             margin-bottom: 3rem;
@@ -227,11 +216,8 @@
             background: var(--flamingo);
         }
         
-        /* Intro Section */
         .intro-section { padding: 8rem 0 8rem 0; text-align: center; }
-        
         .intro-heading {
-            /* Kleiner Subheader -> Montserrat */
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             letter-spacing: 0.2em;
@@ -243,9 +229,8 @@
         }
         
         .intro-text {
-            /* KORREKTUR: Fließtext jetzt Montserrat */
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.1rem, 2vw, 1.4rem); /* Etwas kleiner als vorher, da Leseschrift */
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
             font-weight: 300;
             line-height: 1.8;
             max-width: 800px;
@@ -267,10 +252,7 @@
             margin-bottom: 4rem; position: relative; opacity: 0;
             animation: slideIn 0.8s ease-out forwards; align-items: center;
         }
-        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        
+
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -289,12 +271,10 @@
             font-size: 2rem; color: var(--azure); position: relative; z-index: 2;
             flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .timeline-spacer { width: 100%; }
         
         .timeline-content-wrapper h3 {
-            /* Überschrift -> Boheme Floral */
-            font-family: 'BohemeFloral', serif;
-            font-size: 1.8rem;
+            font-family: 'SweetsHolly', serif;
+            font-size: 2.2rem;
             color: #ffb3c6; margin-bottom: 0.5rem;
         }
         
@@ -306,19 +286,6 @@
         .timeline-content-wrapper p {
             font-family: 'Montserrat', sans-serif;
             color: #ffb3c6; font-size: 0.95rem; opacity: 0.9; line-height: 1.6;
-        }
-        
-        @media (max-width: 768px) {
-            .timeline { padding-left: 0; }
-            .timeline::before { left: 40px; }
-            .timeline-item { grid-template-columns: auto 1fr; gap: 1.5rem; }
-            .timeline-item:nth-child(odd) .timeline-content-wrapper,
-            .timeline-item:nth-child(even) .timeline-content-wrapper {
-                grid-column: 2; text-align: left;
-            }
-            .timeline-item:nth-child(odd) .timeline-icon,
-            .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
-            .timeline-spacer { display: none; }
         }
         
         /* Location */
@@ -336,21 +303,13 @@
         .location-info { text-align: left; }
         
         .location-name {
-            /* Überschrift -> Boheme Floral */
-            font-family: 'BohemeFloral', serif;
-            font-size: 2.5rem; color: #1a3a52; margin-bottom: 2rem;
+            font-family: 'SweetsHolly', serif;
+            font-size: 2.8rem; color: #1a3a52; margin-bottom: 2rem;
         }
         
         .location-address, .location-info p {
-            /* Adresse & Text -> Montserrat */
             font-family: 'Montserrat', sans-serif;
             font-size: 1.1rem; color: #1a3a52; line-height: 1.8; font-weight: 400;
-        }
-        
-        @media (max-width: 768px) {
-            .location-card { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-            .location-hexagon { margin: 0 auto; }
-            .location-info { text-align: center; }
         }
         
         /* Dresscode */
@@ -361,12 +320,8 @@
         }
         
         .dresscode-text {
-            /* KORREKTUR: Dies ist eine Erklärung, daher Montserrat (Text) */
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
+            font-size: 1.2rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 400;
         }
         
         .color-palette {
@@ -384,34 +339,26 @@
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem;
             max-width: 800px; margin: 0 auto;
         }
-        @media (max-width: 768px) { .trauzeugen-grid { grid-template-columns: 1fr; } }
         
         .trauzeuge-card {
             padding: 2rem; text-align: center; transition: transform 0.3s ease;
             animation: fadeInUp 0.8s ease-out forwards; opacity: 0;
         }
-        .trauzeuge-card:nth-child(1) { animation-delay: 0.2s; }
-        .trauzeuge-card:nth-child(2) { animation-delay: 0.3s; }
-        .trauzeuge-card:nth-child(3) { animation-delay: 0.4s; }
-        .trauzeuge-card:nth-child(4) { animation-delay: 0.5s; }
         .trauzeuge-card:hover { transform: translateY(-8px); }
         
         .trauzeuge-image {
             width: 160px; height: 160px; border-radius: 50%; background: #1a3a52;
             margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;
             font-size: 4.5rem; color: #ffb3c6;
-            /* Initialen als Deko -> Boheme Floral */
-            font-family: 'BohemeFloral', serif; 
-            transition: box-shadow 0.3s ease;
+            font-family: 'SweetsHolly', serif; 
         }
         
         .trauzeuge-name {
-            /* Name -> Boheme Floral */
-            font-family: 'BohemeFloral', serif;
-            font-size: 1.6rem; margin-bottom: 0.5rem; color: #1a3a52;
+            font-family: 'SweetsHolly', serif;
+            font-size: 2rem; margin-bottom: 0.5rem; color: #1a3a52;
         }
         
-        .trauzeuge-email { color: #1a3a52; font-size: 0.95rem; opacity: 0.9; }
+        .trauzeuge-email { font-family: 'Montserrat', sans-serif; color: #1a3a52; font-size: 0.95rem; opacity: 0.9; }
         .trauzeuge-email a { color: #1a3a52; text-decoration: none; font-weight: 500; }
         
         /* RSVP Form */
@@ -425,22 +372,17 @@
         .form-group input, .form-group select, .form-group textarea {
             width: 100%; padding: 0.875rem 1rem;
             border: 2px solid rgba(255, 179, 198, 0.3); border-radius: 10px;
-            /* Formular-Input muss gut lesbar sein -> Montserrat */
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem; transition: border-color 0.3s ease;
             background: rgba(255, 255, 255, 0.95);
         }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .radio-group { display: flex; gap: 2rem; margin-top: 0.5rem; }
-        .radio-option { display: flex; align-items: center; gap: 0.8rem; color: #ffb3c6; cursor: pointer; }
-        .radio-option input[type="radio"] { width: 24px; height: 24px; accent-color: #ffb3c6; }
+        
         .submit-btn {
             background: #ffb3c6; color: #1a3a52; border: none; padding: 1rem 3rem;
             font-size: 1.1rem; font-weight: 500; border-radius: 50px; cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em;
         }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 179, 198, 0.4); }
         
         /* Footer */
         footer { text-align: center; padding: 3rem 0; font-size: 0.9rem; position: relative; }
@@ -449,10 +391,19 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .timeline-item { flex-direction: column; gap: 0.5rem; }
-            .location-card, .rsvp-form { padding: 2rem; }
+            .timeline::before { left: 40px; }
+            .timeline-item { grid-template-columns: auto 1fr; gap: 1.5rem; }
+            .timeline-item:nth-child(odd) .timeline-content-wrapper,
+            .timeline-item:nth-child(even) .timeline-content-wrapper {
+                grid-column: 2; text-align: left;
+            }
+            .timeline-item:nth-child(odd) .timeline-icon,
+            .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
+            .timeline-spacer { display: none; }
+            .location-card { grid-template-columns: 1fr; text-align: center; }
+            .location-hexagon { margin: 0 auto; }
+            .trauzeugen-grid { grid-template-columns: 1fr; }
             section { padding: 4rem 0 7rem 0; }
-            .intro-section { padding: 4rem 0 6rem 0; }
         }
     </style>
 </head>
@@ -551,12 +502,12 @@
             <h2 class="section-title">Location</h2>
             <div class="location-card">
                 <div class="location-hexagon">
-                    <img src="images/Location.webp" alt="Zum wilden Esel" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="images/Location.webp" alt="Zum wilden Esel">
                 </div>
                 <div class="location-info">
                     <h3 class="location-name">Zum Wilden Esel</h3>
                     <p class="location-address">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Frankfurter+Str.+76+65439+Flörsheim+am+Main" target="_blank" style="color: #1a3a52; text-decoration: none; transition: opacity 0.3s;">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Frankfurter+Str.+76+65439+Flörsheim+am+Main" target="_blank" style="color: #1a3a52; text-decoration: none;">
                             Frankfurter Str. 76<br>65439 Flörsheim am Main
                         </a>
                     </p>
@@ -714,11 +665,10 @@
             });
         }, observerOptions);
         
-        // Observe all animated elements
         document.addEventListener('DOMContentLoaded', () => {
             const animatedElements = document.querySelectorAll(
                 '.section-title, .intro-heading, .intro-text, .location-card, ' +
-                '.dresscode-box, .trauzeuge-card, .rsvp-form, .hero-date'
+                '.dresscode-box, .trauzeuge-card, .rsvp-form, .hero-date, .timeline-item'
             );
             
             animatedElements.forEach(el => {
@@ -727,7 +677,6 @@
             });
         });
         
-        // Form Submission
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Vielen Dank für deine Rückmeldung! Wir haben deine Antwort erhalten.');
