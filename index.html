@@ -47,6 +47,148 @@
             font-weight: normal;
         }
 
+        /* Password Screen */
+        #password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5573 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #password-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .password-container {
+            background: rgba(255, 179, 198, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 179, 198, 0.3);
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .password-names {
+            font-family: 'BohemeFloral', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #ffb3c6;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .password-ampersand {
+            color: var(--gold);
+            font-style: italic;
+            margin: 0 0.5rem;
+        }
+
+        .password-groom {
+            color: var(--azure);
+        }
+
+        .password-date {
+            font-family: 'BohemeFloral', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--flamingo);
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .password-label {
+            font-size: 1rem;
+            color: #ffb3c6;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .password-input-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 179, 198, 0.4);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--flamingo);
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .password-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--flamingo);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .password-submit:hover {
+            background: #ff5589;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .password-error {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .password-error.show {
+            opacity: 1;
+        }
+
+        .password-hearts {
+            font-size: 2rem;
+            color: var(--flamingo);
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+        }
+
         .section-divider {
             width: 100%;
             height: auto;
@@ -61,11 +203,6 @@
         .divider-top { top: -1px; transform: rotate(180deg); }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -254,21 +391,22 @@
         
         .timeline-item:nth-child(odd) .timeline-content-wrapper { grid-column: 1; text-align: right; }
         .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 3; text-align: left; }
-.timeline-icon { 
-    width: 80px; 
-    height: 80px; 
-    background: var(--flamingo); 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 2rem; 
-    color: var(--azure); 
-    position: relative; 
-    z-index: 2; 
-    flex-shrink: 0; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 10px #1a3a52; 
-}        .timeline-spacer { width: 100%; }
+        .timeline-icon { 
+            width: 80px; 
+            height: 80px; 
+            background: var(--flamingo); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 2rem; 
+            color: var(--azure); 
+            position: relative; 
+            z-index: 2; 
+            flex-shrink: 0; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 10px #1a3a52; 
+        }        
+        .timeline-spacer { width: 100%; }
         
         .timeline-content-wrapper h3 { 
             font-family: 'Playfair Display', serif;
@@ -300,8 +438,7 @@
         }
         .dresscode-box h3 { 
             font-family: 'Playfair Display', serif;
-            font-size: 2n
-                em; 
+            font-size: 2rem; 
             margin-bottom: 1.5rem; 
             font-weight: 600;
         }
@@ -339,6 +476,10 @@
         footer .hearts { font-size: 1.5rem; margin-bottom: 0.5rem; }
 
         @media (max-width: 768px) {
+            .password-container {
+                padding: 3rem 2rem;
+            }
+
             .timeline::before { left: 40px; }
             .timeline-item { grid-template-columns: auto 1fr; gap: 1.5rem; }
             .timeline-item:nth-child(odd) .timeline-content-wrapper, .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 2; text-align: left; }
@@ -349,132 +490,210 @@
     </style>
 </head>
 <body>
-    <section class="hero bg-blue">
-        <img src="images/Tuan -Anh2403.JPG" alt="Wedding" class="hero-image">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-names">Ngọc Anh <span class="ampersand">&</span> <span class="groom-name">Anh Tuấn</span></h1>
-            <p class="hero-date">20. Juni 2026</p>
-            <div class="countdown-container">
-                <p class="countdown-label">Wir heiraten in</p>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item"><span class="countdown-number" id="days">0</span><span class="countdown-text">Tage</span></div>
-                    <div class="countdown-item"><span class="countdown-number" id="hours">0</span><span class="countdown-text">Stunden</span></div>
-                    <div class="countdown-item"><span class="countdown-number" id="minutes">0</span><span class="countdown-text">Minuten</span></div>
-                    <div class="countdown-item"><span class="countdown-number" id="seconds">0</span><span class="countdown-text">Sekunden</span></div>
-                </div>
+    <!-- Password Screen -->
+    <div id="password-screen">
+        <div class="password-container">
+            <h1 class="password-names">
+                Ngọc Anh <span class="password-ampersand">&</span> <span class="password-groom">Anh Tuấn</span>
+            </h1>
+            <p class="password-date">20. Juni 2026</p>
+            
+            <p class="password-label">Bitte gib das Passwort ein</p>
+            
+            <div class="password-input-wrapper">
+                <input 
+                    type="password" 
+                    id="password-input" 
+                    class="password-input" 
+                    placeholder="Passwort"
+                    autocomplete="off"
+                >
             </div>
+            
+            <button type="button" id="password-submit" class="password-submit">
+                Eintreten
+            </button>
+            
+            <p class="password-error" id="password-error">
+                Falsches Passwort. Bitte versuche es erneut.
+            </p>
+            
+            <div class="password-hearts">♥ ♥ ♥</div>
         </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
+    </div>
 
-    <section class="intro-section bg-pink">
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-        <div class="container">
-            <p class="intro-heading">Ein himmlisches Paar</p>
-            <p class="intro-text">Wir freuen uns riesig, euch zu unserer Hochzeit am 20. Juni 2026 einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.</p>
-        </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
-
-    <section id="ablauf" class="bg-blue">
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-        <div class="container">
-            <h2 class="section-title">Ablauf des Tages</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content-wrapper"><h3>Trauung</h3><p class="timeline-time">15:00 Uhr</p></div>
-                    <div class="timeline-icon"><img src="images/Wedding.svg" style="width: 40px;"></div>
-                    <div class="timeline-spacer"></div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-spacer"></div>
-                    <div class="timeline-icon"><img src="images/Dinner.svg" style="width: 40px;"></div>
-                    <div class="timeline-content-wrapper"><h3>Dinner</h3><p class="timeline-time">18:30 Uhr</p></div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content-wrapper"><h3>Party</h3><p class="timeline-time">21:00 Uhr</p></div>
-                    <div class="timeline-icon"><img src="images/Music.svg" style="width: 40px;"></div>
-                    <div class="timeline-spacer"></div>
-                </div>
-            </div>
-        </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
-
-    <section id="location" class="bg-pink">
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-        <div class="container">
-            <h2 class="section-title">Location</h2>
-            <div class="location-card">
-                <div class="location-hexagon"><img src="images/Location.webp"></div>
-                <div class="location-info">
-                    <h3 class="location-name">Zum Wilden Esel</h3>
-                    <p class="location-address">Frankfurter Str. 76<br>65439 Flörsheim am Main</p>
-                </div>
-            </div>
-        </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
-
-    <section id="dresscode" class="bg-blue">
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-        <div class="container">
-            <h2 class="section-title">Dresscode</h2>
-            <div class="dresscode-box">
-                <h3>Festlich Elegant</h3>
-                <p class="dresscode-text">Wir freuen uns auf festliche, elegante Outfits. Als Inspiration für eure Kleiderwahl haben wir eine Farbpalette zusammengestellt:</p>
-                <div class="color-palette">
-                    <div class="color-swatch" style="background: #FAF6F0;"></div>
-                    <div class="color-swatch" style="background: #ffb3c6;"></div>
-                    <div class="color-swatch" style="background: #2C5F8D;"></div>
-                    <div class="color-swatch" style="background: #D4AF37;"></div>
-                </div>
-            </div>
-        </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
-
-    <section id="trauzeugen" class="bg-pink">
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-        <div class="container">
-            <h2 class="section-title">Unsere Trauzeugen</h2>
-            <div class="trauzeugen-grid">
-                <div class="trauzeuge-card"><div class="trauzeuge-image">M</div><h3 class="trauzeuge-name">Maria Schmidt</h3><p class="trauzeuge-email"><a href="mailto:maria@example.com">maria@example.com</a></p></div>
-                <div class="trauzeuge-card"><div class="trauzeuge-image">L</div><h3 class="trauzeuge-name">Lukas Müller</h3><p class="trauzeuge-email"><a href="mailto:lukas@example.com">lukas@example.com</a></p></div>
-                <div class="trauzeuge-card"><div class="trauzeuge-image">S</div><h3 class="trauzeuge-name">Sophie Weber</h3><p class="trauzeuge-email"><a href="mailto:sophie@example.com">sophie@example.com</a></p></div>
-                <div class="trauzeuge-card"><div class="trauzeuge-image">T</div><h3 class="trauzeuge-name">Thomas Fischer</h3><p class="trauzeuge-email"><a href="mailto:thomas@example.com">thomas@example.com</a></p></div>
-            </div>
-        </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
-
-    <section id="rsvp" class="bg-blue">
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-        <div class="container">
-            <h2 class="section-title">RSVP</h2>
-            <form class="rsvp-form" id="rsvpForm">
-                <div class="form-group"><label>Vorname *</label><input type="text" name="vorname" required></div>
-                <div class="form-group"><label>Nachname *</label><input type="text" name="nachname" required></div>
-                <div class="form-group"><label>Zusage *</label>
-                    <div class="radio-group">
-                        <div class="radio-option"><input type="radio" name="zusage" value="ja" required> Ja</div>
-                        <div class="radio-option"><input type="radio" name="zusage" value="nein"> Nein</div>
+    <!-- Main Content -->
+    <div id="main-content">
+        <section class="hero bg-blue">
+            <img src="images/Tuan -Anh2403.JPG" alt="Wedding" class="hero-image">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-names">Ngọc Anh <span class="ampersand">&</span> <span class="groom-name">Anh Tuấn</span></h1>
+                <p class="hero-date">20. Juni 2026</p>
+                <div class="countdown-container">
+                    <p class="countdown-label">Wir heiraten in</p>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item"><span class="countdown-number" id="days">0</span><span class="countdown-text">Tage</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="hours">0</span><span class="countdown-text">Stunden</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="minutes">0</span><span class="countdown-text">Minuten</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="seconds">0</span><span class="countdown-text">Sekunden</span></div>
                     </div>
                 </div>
-                <div class="form-group"><label>Anzahl der Gäste *</label><input type="number" name="gaeste" min="1" value="1" required></div>
-                <div class="form-group"><label>Namen der Gäste</label><textarea name="namen"></textarea></div>
-                <div class="form-group"><label>Allergene</label><input type="text" name="allergene"></div>
-                <div class="form-group"><label>Wünsche</label><textarea name="anmerkungen"></textarea></div>
-                <button type="submit" class="submit-btn">Absenden</button>
-            </form>
-        </div>
-        <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-    </section>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
 
-    <footer class="bg-pink"><div class="hearts">♥ ♥ ♥</div><p>Wir freuen uns!</p><p>Ngọc Anh & Anh Tuấn</p></footer>
+        <section class="intro-section bg-pink">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <p class="intro-heading">Ein himmlisches Paar</p>
+                <p class="intro-text">Wir freuen uns riesig, euch zu unserer Hochzeit am 20. Juni 2026 einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.</p>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="ablauf" class="bg-blue">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <h2 class="section-title">Ablauf des Tages</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content-wrapper"><h3>Trauung</h3><p class="timeline-time">15:00 Uhr</p></div>
+                        <div class="timeline-icon"><img src="images/Wedding.svg" style="width: 40px;"></div>
+                        <div class="timeline-spacer"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-spacer"></div>
+                        <div class="timeline-icon"><img src="images/Dinner.svg" style="width: 40px;"></div>
+                        <div class="timeline-content-wrapper"><h3>Dinner</h3><p class="timeline-time">18:30 Uhr</p></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content-wrapper"><h3>Party</h3><p class="timeline-time">21:00 Uhr</p></div>
+                        <div class="timeline-icon"><img src="images/Music.svg" style="width: 40px;"></div>
+                        <div class="timeline-spacer"></div>
+                    </div>
+                </div>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="location" class="bg-pink">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <h2 class="section-title">Location</h2>
+                <div class="location-card">
+                    <div class="location-hexagon"><img src="images/Location.webp"></div>
+                    <div class="location-info">
+                        <h3 class="location-name">Zum Wilden Esel</h3>
+                        <p class="location-address">Frankfurter Str. 76<br>65439 Flörsheim am Main</p>
+                    </div>
+                </div>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="dresscode" class="bg-blue">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <h2 class="section-title">Dresscode</h2>
+                <div class="dresscode-box">
+                    <h3>Festlich Elegant</h3>
+                    <p class="dresscode-text">Wir freuen uns auf festliche, elegante Outfits. Als Inspiration für eure Kleiderwahl haben wir eine Farbpalette zusammengestellt:</p>
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #FAF6F0;"></div>
+                        <div class="color-swatch" style="background: #ffb3c6;"></div>
+                        <div class="color-swatch" style="background: #2C5F8D;"></div>
+                        <div class="color-swatch" style="background: #D4AF37;"></div>
+                    </div>
+                </div>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="trauzeugen" class="bg-pink">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <h2 class="section-title">Unsere Trauzeugen</h2>
+                <div class="trauzeugen-grid">
+                    <div class="trauzeuge-card"><div class="trauzeuge-image">M</div><h3 class="trauzeuge-name">Maria Schmidt</h3><p class="trauzeuge-email"><a href="mailto:maria@example.com">maria@example.com</a></p></div>
+                    <div class="trauzeuge-card"><div class="trauzeuge-image">L</div><h3 class="trauzeuge-name">Lukas Müller</h3><p class="trauzeuge-email"><a href="mailto:lukas@example.com">lukas@example.com</a></p></div>
+                    <div class="trauzeuge-card"><div class="trauzeuge-image">S</div><h3 class="trauzeuge-name">Sophie Weber</h3><p class="trauzeuge-email"><a href="mailto:sophie@example.com">sophie@example.com</a></p></div>
+                    <div class="trauzeuge-card"><div class="trauzeuge-image">T</div><h3 class="trauzeuge-name">Thomas Fischer</h3><p class="trauzeuge-email"><a href="mailto:thomas@example.com">thomas@example.com</a></p></div>
+                </div>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="rsvp" class="bg-blue">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <h2 class="section-title">RSVP</h2>
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group"><label>Vorname *</label><input type="text" name="vorname" required></div>
+                    <div class="form-group"><label>Nachname *</label><input type="text" name="nachname" required></div>
+                    <div class="form-group"><label>Zusage *</label>
+                        <div class="radio-group">
+                            <div class="radio-option"><input type="radio" name="zusage" value="ja" required> Ja</div>
+                            <div class="radio-option"><input type="radio" name="zusage" value="nein"> Nein</div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Anzahl der Gäste *</label><input type="number" name="gaeste" min="1" value="1" required></div>
+                    <div class="form-group"><label>Namen der Gäste</label><textarea name="namen"></textarea></div>
+                    <div class="form-group"><label>Allergene</label><input type="text" name="allergene"></div>
+                    <div class="form-group"><label>Wünsche</label><textarea name="anmerkungen"></textarea></div>
+                    <button type="submit" class="submit-btn">Absenden</button>
+                </form>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <footer class="bg-pink"><div class="hearts">♥ ♥ ♥</div><p>Wir freuen uns!</p><p>Ngọc Anh & Anh Tuấn</p></footer>
+    </div>
 
     <script>
+        // Password Protection
+        const correctPassword = 'Bui2026';
+        const passwordScreen = document.getElementById('password-screen');
+        const mainContent = document.getElementById('main-content');
+        const passwordInput = document.getElementById('password-input');
+        const passwordSubmit = document.getElementById('password-submit');
+        const passwordError = document.getElementById('password-error');
+
+        // Check if user already authenticated
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            passwordScreen.classList.add('hidden');
+            mainContent.classList.add('visible');
+        }
+
+        function checkPassword() {
+            const enteredPassword = passwordInput.value;
+            
+            if (enteredPassword === correctPassword) {
+                sessionStorage.setItem('authenticated', 'true');
+                passwordScreen.classList.add('hidden');
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                }, 300);
+            } else {
+                passwordError.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                setTimeout(() => {
+                    passwordError.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        passwordSubmit.addEventListener('click', checkPassword);
+        
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Countdown Timer
         const weddingDate = new Date('2026-06-20T15:00:00').getTime();
         function updateCountdown() {
             const now = new Date().getTime();
@@ -484,9 +703,19 @@
             document.getElementById('minutes').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             document.getElementById('seconds').textContent = Math.floor((distance % (1000 * 60)) / 1000);
         }
-        setInterval(updateCountdown, 1000); updateCountdown();
-        const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.style.animationPlayState = 'running'; }); });
-        document.querySelectorAll('.section-title, .location-card, .trauzeuge-card, .rsvp-form').forEach(el => { el.style.animationPlayState = 'paused'; observer.observe(el); });
+        setInterval(updateCountdown, 1000); 
+        updateCountdown();
+        
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver((entries) => { 
+            entries.forEach(e => { 
+                if(e.isIntersecting) e.target.style.animationPlayState = 'running'; 
+            }); 
+        });
+        document.querySelectorAll('.section-title, .location-card, .trauzeuge-card, .rsvp-form').forEach(el => { 
+            el.style.animationPlayState = 'paused'; 
+            observer.observe(el); 
+        });
     </script>
 </body>
 </html>
