@@ -10,8 +10,8 @@
     <style>
         /* --- 1. SCHRIFTART EINBINDEN --- */
         @font-face {
-            font-family: 'CandleScript';
-            src: url('UVF Candlescript Pro.otf') format('opentype');
+            font-family: 'BohemeFloral';
+            src: url('DFVN Boheme Floral.otf') format('opentype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -43,7 +43,7 @@
         
         /* --- Globale Regel für Überschriften --- */
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'CandleScript', cursive;
+            font-family: 'BohemeFloral', cursive;
             font-weight: normal;
         }
 
@@ -110,7 +110,7 @@
         }
         
         .hero-names {
-            font-family: 'CandleScript', cursive;
+            font-family: 'BohemeFloral', cursive;
             font-size: clamp(3rem, 8vw, 7rem);
             font-weight: normal;
             letter-spacing: 0.05em;
@@ -135,7 +135,7 @@
         }
 
         .hero-date {
-            font-family: 'CandleScript', cursive;
+            font-family: 'BohemeFloral', cursive;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--flamingo);
             margin-bottom: 3rem;
@@ -167,7 +167,7 @@
         .countdown-item { text-align: center; }
         
         .countdown-number {
-            font-family: 'CandleScript', cursive;
+            font-family: 'BohemeFloral', cursive;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 600;
             line-height: 1;
@@ -198,7 +198,7 @@
         .bg-pink .section-title, .bg-pink .intro-heading, .bg-pink .intro-text, .bg-pink .intro-details { color: #1a3a52; }
         
         .section-title {
-            font-family: 'CandleScript', cursive;
+            font-family: 'BohemeFloral', cursive;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 300;
             text-align: center;
@@ -219,7 +219,7 @@
         .intro-heading { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem; opacity: 0; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; }
         
         .intro-text {
-            font-family: 'CandleScript', cursive;
+            font-family: 'BohemeFloral', cursive;
             font-size: clamp(1.8rem, 4vw, 3rem);
             font-weight: 300;
             line-height: 1.5;
@@ -248,7 +248,7 @@
         .timeline-icon { width: 80px; height: 80px; background: var(--flamingo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--azure); position: relative; z-index: 2; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .timeline-spacer { width: 100%; }
         
-        .timeline-content-wrapper h3 { font-family: 'CandleScript', cursive; font-size: 1.8rem; font-weight: 600; color: #ffb3c6; margin-bottom: 0.5rem; }
+        .timeline-content-wrapper h3 { font-family: 'BohemeFloral', cursive; font-size: 1.8rem; font-weight: 600; color: #ffb3c6; margin-bottom: 0.5rem; }
         .timeline-time { font-size: 1rem; font-weight: 500; color: #ffb3c6; margin-bottom: 0.5rem; }
         .timeline-content-wrapper p { color: #ffb3c6; font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
 
@@ -256,12 +256,12 @@
         .location-card { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 4rem; align-items: center; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
         .location-hexagon { width: 300px; height: 260px; position: relative; overflow: hidden; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); background: #1a3a52; }
         .location-hexagon img { width: 100%; height: 100%; object-fit: cover; }
-        .location-name { font-family: 'CandleScript', cursive; font-size: 2.5rem; font-weight: 600; color: #1a3a52; margin-bottom: 2rem; }
+        .location-name { font-family: 'BohemeFloral', cursive; font-size: 2.5rem; font-weight: 600; color: #1a3a52; margin-bottom: 2rem; }
         .location-address { font-size: 1.3rem; color: #1a3a52; line-height: 1.8; font-weight: 400; }
 
         /* Dresscode */
         .dresscode-box { color: #ffb3c6; padding: 3rem; text-align: center; max-width: 600px; margin: 0 auto; animation: scaleIn 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
-        .dresscode-box h3 { font-family: 'CandleScript', cursive; font-size: 2rem; margin-bottom: 1.5rem; font-weight: 300; font-style: italic; }
+        .dresscode-box h3 { font-family: 'BohemeFloral', cursive; font-size: 2rem; margin-bottom: 1.5rem; font-weight: 300; font-style: italic; }
         .color-palette { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
         .color-swatch { width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease; }
         .color-swatch:hover { transform: scale(1.1); }
@@ -274,8 +274,8 @@
         .trauzeuge-card:nth-child(3) { animation-delay: 0.4s; }
         .trauzeuge-card:nth-child(4) { animation-delay: 0.5s; }
         .trauzeuge-card:hover { transform: translateY(-8px); }
-        .trauzeuge-image { width: 160px; height: 160px; border-radius: 50%; background: #1a3a52; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; color: #ffb3c6; font-family: 'CandleScript', cursive; }
-        .trauzeuge-name { font-family: 'CandleScript', cursive; font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem; color: #1a3a52; }
+        .trauzeuge-image { width: 160px; height: 160px; border-radius: 50%; background: #1a3a52; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; color: #ffb3c6; font-family: 'BohemeFloral', cursive; }
+        .trauzeuge-name { font-family: 'BohemeFloral', cursive; font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem; color: #1a3a52; }
         .trauzeuge-email a { color: #1a3a52; text-decoration: none; font-weight: 500; }
 
         /* RSVP */
