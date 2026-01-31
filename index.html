@@ -136,7 +136,7 @@
 
         .hero-date {
             font-family: 'BohemeFloral', cursive;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             color: var(--flamingo);
             margin-bottom: 3rem;
             letter-spacing: 0.1em;
@@ -199,7 +199,7 @@
         
         .section-title {
             font-family: 'BohemeFloral', cursive;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 300;
             text-align: center;
             margin-bottom: 3rem;
@@ -216,13 +216,22 @@
         }
         
         .intro-section { padding: 8rem 0 8rem 0; text-align: center; }
-        .intro-heading { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem; opacity: 0; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; }
-        
-        .intro-text {
+        .intro-heading { 
             font-family: 'BohemeFloral', cursive;
             font-size: clamp(1.8rem, 4vw, 3rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem; 
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease-out forwards; 
+            animation-delay: 0.3s; 
             font-weight: 300;
-            line-height: 1.5;
+        }
+        
+        .intro-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.8;
             max-width: 900px;
             margin: 0 auto;
             animation: fadeInUp 0.8s ease-out forwards;
@@ -248,7 +257,13 @@
         .timeline-icon { width: 80px; height: 80px; background: var(--flamingo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--azure); position: relative; z-index: 2; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .timeline-spacer { width: 100%; }
         
-        .timeline-content-wrapper h3 { font-family: 'BohemeFloral', cursive; font-size: 1.8rem; font-weight: 600; color: #ffb3c6; margin-bottom: 0.5rem; }
+        .timeline-content-wrapper h3 { 
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem; 
+            font-weight: 600; 
+            color: #ffb3c6; 
+            margin-bottom: 0.5rem; 
+        }
         .timeline-time { font-size: 1rem; font-weight: 500; color: #ffb3c6; margin-bottom: 0.5rem; }
         .timeline-content-wrapper p { color: #ffb3c6; font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
 
@@ -260,8 +275,27 @@
         .location-address { font-size: 1.3rem; color: #1a3a52; line-height: 1.8; font-weight: 400; }
 
         /* Dresscode */
-        .dresscode-box { color: #ffb3c6; padding: 3rem; text-align: center; max-width: 600px; margin: 0 auto; animation: scaleIn 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
-        .dresscode-box h3 { font-family: 'BohemeFloral', cursive; font-size: 2rem; margin-bottom: 1.5rem; font-weight: 300; font-style: italic; }
+        .dresscode-box { 
+            color: #ffb3c6; 
+            padding: 3rem; 
+            text-align: center; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            animation: scaleIn 0.8s ease-out forwards; 
+            animation-delay: 0.3s; 
+            opacity: 0; 
+        }
+        .dresscode-box h3 { 
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem; 
+            margin-bottom: 1.5rem; 
+            font-weight: 500;
+        }
+        .dresscode-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
         .color-palette { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
         .color-swatch { width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease; }
         .color-swatch:hover { transform: scale(1.1); }
@@ -375,6 +409,7 @@
             <h2 class="section-title">Dresscode</h2>
             <div class="dresscode-box">
                 <h3>Festlich Elegant</h3>
+                <p class="dresscode-text">Wir freuen uns auf festliche, elegante Outfits. Als Inspiration für eure Kleiderwahl haben wir eine Farbpalette zusammengestellt:</p>
                 <div class="color-palette">
                     <div class="color-swatch" style="background: #FAF6F0;"></div>
                     <div class="color-swatch" style="background: #ffb3c6;"></div>
