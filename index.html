@@ -327,6 +327,9 @@
         .bg-pink { background: #ffb3c6; }
         .bg-pink .section-title, .bg-pink .intro-heading, .bg-pink .intro-text, .bg-pink .intro-details { color: #1a3a52; }
         
+        .bg-cream { background: var(--cream); }
+        .bg-cream .section-title { color: #1a3a52; }
+        
         .section-title {
             font-family: 'BohemeFloral', cursive;
             font-size: clamp(3rem, 6vw, 5rem);
@@ -411,50 +414,213 @@
         .timeline-time { font-size: 1rem; font-weight: 500; color: #ffb3c6; margin-bottom: 0.5rem; }
         .timeline-content-wrapper p { color: #ffb3c6; font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
 
-        /* Location */
-        .location-card { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 4rem; align-items: center; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
-        .location-hexagon { width: 300px; height: 260px; position: relative; overflow: hidden; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); background: #1a3a52; }
-        .location-hexagon img { width: 100%; height: 100%; object-fit: cover; }
-        .location-name { font-family: 'BohemeFloral', cursive; font-size: 2.5rem; font-weight: 600; color: #1a3a52; margin-bottom: 2rem; }
-        .location-address { font-size: 1.3rem; color: #1a3a52; line-height: 1.8; font-weight: 400; }
+        /* Location Section */
+        .location-section {
+            padding: 8rem 0 9rem 0;
+        }
 
-        /* Dresscode */
-        .dresscode-box { 
-            color: #ffb3c6; 
-            padding: 3rem; 
-            text-align: center; 
-            max-width: 600px; 
-            margin: 0 auto; 
-            animation: scaleIn 0.8s ease-out forwards; 
-            animation-delay: 0.3s; 
-            opacity: 0; 
+        .location-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
-        .dresscode-box h3 { 
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+
+        .location-text {
+            padding-right: 2rem;
+        }
+
+        .location-subtitle {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem; 
-            margin-bottom: 1.5rem; 
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 600;
-        }
-        .dresscode-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            color: #1a3a52;
             margin-bottom: 2rem;
         }
-        .color-palette { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
-        .color-swatch { width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease; }
-        .color-swatch:hover { transform: scale(1.1); }
+
+        .location-description {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 2.5rem;
+        }
+
+        .location-details {
+            margin-bottom: 2.5rem;
+        }
+
+        .location-details h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a3a52;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-details p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .location-dresscode {
+            margin-bottom: 2.5rem;
+        }
+
+        .location-dresscode h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a3a52;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-dresscode p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .maps-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--flamingo);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .maps-button:hover {
+            background: #ff5589;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .location-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .location-image {
+            width: 100%;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .location-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .location-map {
+            width: 100%;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
         /* Trauzeugen */
         .trauzeugen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 800px; margin: 0 auto; }
         .trauzeuge-card { padding: 2rem; text-align: center; transition: transform 0.3s ease; animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
         .trauzeuge-card:nth-child(1) { animation-delay: 0.2s; }
         .trauzeuge-card:nth-child(2) { animation-delay: 0.3s; }
-        .trauzeuge-card:nth-child(3) { animation-delay: 0.4s; }
-        .trauzeuge-card:nth-child(4) { animation-delay: 0.5s; }
         .trauzeuge-card:hover { transform: translateY(-8px); }
-        .trauzeuge-image { width: 160px; height: 160px; border-radius: 50%; background: #1a3a52; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: #ffb3c6; font-family: 'BohemeFloral', cursive; }
-        .trauzeuge-name { font-family: 'BohemeFloral', cursive; font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; color: #1a3a52; }
-        .trauzeuge-email a { color: #1a3a52; text-decoration: none; font-weight: 500; }
+        .trauzeuge-image { width: 160px; height: 160px; border-radius: 50%; background: #1a3a52; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; color: #ffb3c6; font-family: 'BohemeFloral', cursive; }
+        .trauzeuge-name { font-family: 'BohemeFloral', cursive; font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; color: #1a3a52; }
+        
+        .trauzeuge-contact {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #1a3a52;
+            color: #ffb3c6;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-icon:hover {
+            background: var(--flamingo);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .contact-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 8rem 0 9rem 0;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a3a52;
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-answer {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
 
         /* RSVP */
         .rsvp-form { max-width: 700px; margin: 0 auto; padding: 3rem; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
@@ -493,6 +659,22 @@
         footer { text-align: center; padding: 3rem 0; font-size: 0.9rem; position: relative; }
         footer .hearts { font-size: 1.5rem; margin-bottom: 0.5rem; }
 
+        @media (max-width: 968px) {
+            .location-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .location-text {
+                padding-right: 0;
+            }
+
+            .location-image,
+            .location-map {
+                height: 300px;
+            }
+        }
+
         @media (max-width: 768px) {
             .password-container {
                 padding: 3rem 2rem;
@@ -504,9 +686,6 @@
             .timeline-item:nth-child(odd) .timeline-icon, .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
             .timeline-spacer { display: none; }
             section { padding: 4rem 0 7rem 0; }
-            
-            .location-card { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-            .location-hexagon { margin: 0 auto; }
             
             .trauzeugen-grid { grid-template-columns: 1fr; }
         }
@@ -598,33 +777,43 @@
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
         </section>
 
-        <section id="location" class="bg-pink">
+        <section id="location" class="location-section bg-cream">
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-            <div class="container">
-                <h2 class="section-title">Location</h2>
-                <div class="location-card">
-                    <div class="location-hexagon"><img src="images/Location.webp"></div>
-                    <div class="location-info">
-                        <h3 class="location-name">Zum Wilden Esel</h3>
-                        <p class="location-address">Frankfurter Str. 76<br>65439 Flörsheim am Main</p>
-                    </div>
-                </div>
-            </div>
-            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
-        </section>
+            <div class="location-container">
+                <h2 class="section-title">Location & Anfahrt</h2>
+                <div class="location-content">
+                    <div class="location-text">
+                        <p class="location-description">
+                            Unsere Feier findet in der idyllischen Kirche von Rüdlingen und Buchberg statt, mit wunderschönem Blick auf den Rhein und das Flaachtal. Die Umgebung bietet eine perfekte Kulisse für unseren besonderen Tag.
+                        </p>
+                        
+                        <div class="location-details">
+                            <h4>Adresse:</h4>
+                            <p>Dorfstrasse 2, 8454 Buchberg</p>
+                        </div>
 
-        <section id="dresscode" class="bg-blue">
-            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-            <div class="container">
-                <h2 class="section-title">Dresscode</h2>
-                <div class="dresscode-box">
-                    <h3>Festlich Elegant</h3>
-                    <p class="dresscode-text">Wir freuen uns auf festliche, elegante Outfits. Als Inspiration für eure Kleiderwahl haben wir eine Farbpalette zusammengestellt:</p>
-                    <div class="color-palette">
-                        <div class="color-swatch" style="background: #FAF6F0;"></div>
-                        <div class="color-swatch" style="background: #ffb3c6;"></div>
-                        <div class="color-swatch" style="background: #2C5F8D;"></div>
-                        <div class="color-swatch" style="background: #D4AF37;"></div>
+                        <div class="location-dresscode">
+                            <h4>Dresscode:</h4>
+                            <p>Festlich-elegant. Da die Zeremonie im Freien stattfindet, empfehlen wir bequeme Schuhe, um den Garten und die Natur genießen zu können.</p>
+                        </div>
+
+                        <a href="https://www.google.com/maps/place/Dorfstrasse+2,+8454+Buchberg,+Schweiz" target="_blank" class="maps-button">
+                            Google Maps öffnen
+                        </a>
+                    </div>
+
+                    <div class="location-visual">
+                        <div class="location-image">
+                            <img src="images/Location.webp" alt="Kirche Buchberg">
+                        </div>
+                        <div class="location-map">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.8287954!2d8.6234!3d47.6984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479a9f0c0c0c0c0d%3A0x0!2sDorfstrasse%202%2C%208454%20Buchberg!5e0!3m2!1sde!2sde!4v1234567890" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -636,8 +825,36 @@
             <div class="container">
                 <h2 class="section-title">Unsere Trauzeugen</h2>
                 <div class="trauzeugen-grid">
-                    <div class="trauzeuge-card"><div class="trauzeuge-image">G</div><h3 class="trauzeuge-name">Patrick Gorbracht</h3><p class="trauzeuge-email"><a href="mailto:pgorbracht@googlemail.com">pgorbracht@googlemail.com</a></p></div>
-                    <div class="trauzeuge-card"><div class="trauzeuge-image">H</div><h3 class="trauzeuge-name">Hannah Wittmann</h3><p class="trauzeuge-email"><a href="mailto:hannah.wittmann13@gmail.com">hannah.wittmann13@gmail.com</a></p></div>
+                    <div class="trauzeuge-card">
+                        <div class="trauzeuge-image">G</div>
+                        <h3 class="trauzeuge-name">Patrick Gorbracht</h3>
+                        <div class="trauzeuge-contact">
+                            <a href="tel:+491234567890" class="contact-icon" title="Anrufen">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:patrick@example.com" class="contact-icon" title="E-Mail senden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="trauzeuge-card">
+                        <div class="trauzeuge-image">H</div>
+                        <h3 class="trauzeuge-name">Hannah Wittmann</h3>
+                        <div class="trauzeuge-contact">
+                            <a href="mailto:hannah.wittmann13@gmail.com" class="contact-icon" title="E-Mail senden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
@@ -678,8 +895,8 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="namen">Namen der Gäste</label>
-                        <textarea id="namen" name="namen" placeholder="Namen der Gäste"></textarea>
+                        <label for="namen">Namen der Gäste *</label>
+                        <textarea id="namen" name="namen" placeholder="Namen der Gäste" required></textarea>
                     </div>
                     
                     <div class="form-group">
@@ -691,6 +908,21 @@
                     
                     <div class="form-message" id="formMessage"></div>
                 </form>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="faq" class="faq-section bg-cream">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="faq-container">
+                <h2 class="section-title">FAQ</h2>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Was soll ich schenken?</h3>
+                    <p class="faq-answer">
+                        Eure Anwesenheit ist das schönste Geschenk für uns! Falls ihr uns dennoch etwas schenken möchtet, würden wir uns über einen Beitrag zu unserer Hochzeitsreise freuen. Wir träumen davon, gemeinsam die Welt zu entdecken und unvergessliche Erinnerungen zu sammeln. Ein kleiner Umschlag ist herzlich willkommen, aber keinesfalls verpflichtend.
+                    </p>
+                </div>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
         </section>
@@ -810,7 +1042,7 @@
                 if(e.isIntersecting) e.target.style.animationPlayState = 'running'; 
             }); 
         });
-        document.querySelectorAll('.section-title, .location-card, .trauzeuge-card, .rsvp-form').forEach(el => { 
+        document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item').forEach(el => { 
             el.style.animationPlayState = 'paused'; 
             observer.observe(el); 
         });
