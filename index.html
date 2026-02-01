@@ -466,12 +466,12 @@
         .radio-option { display: flex; align-items: center; gap: 0.8rem; color: #ffb3c6; cursor: pointer; }
         .submit-btn { background: #ffb3c6; color: #1a3a52; border: none; padding: 1rem 3rem; font-size: 1.1rem; font-weight: 500; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-family: 'Playfair Display', serif; }
         .submit-btn:hover { background: #ff9eb8; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 179, 198, 0.4); }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         /* Form Success/Error Messages */
         .form-message {
             margin-top: 1.5rem;
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             border-radius: 10px;
             text-align: center;
             font-weight: 500;
@@ -647,42 +647,44 @@
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
             <div class="container">
                 <h2 class="section-title">RSVP</h2>
-                <form class="rsvp-form" id="rsvpForm" action="https://submit-form.com/DNvLkHYjm" method="POST">
+                <form class="rsvp-form" id="rsvpForm" action="https://submit-form.com/DNvLkHYjm">
                     <div class="form-group">
-                        <label>Vorname *</label>
-                        <input type="text" name="vorname" required>
+                        <label for="vorname">Vorname *</label>
+                        <input type="text" id="vorname" name="vorname" placeholder="Vorname" required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Nachname *</label>
-                        <input type="text" name="nachname" required>
+                        <label for="nachname">Nachname *</label>
+                        <input type="text" id="nachname" name="nachname" placeholder="Nachname" required>
                     </div>
                     
                     <div class="form-group">
                         <label>Zusage *</label>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" name="zusage" value="ja" required> Ja
+                                <input type="radio" id="zusage-ja" name="zusage" value="ja" required> 
+                                <label for="zusage-ja">Ja</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" name="zusage" value="nein"> Nein
+                                <input type="radio" id="zusage-nein" name="zusage" value="nein"> 
+                                <label for="zusage-nein">Nein</label>
                             </div>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>Anzahl der Gäste *</label>
-                        <input type="number" name="gaeste" min="1" value="1" required>
+                        <label for="gaeste">Anzahl der Gäste *</label>
+                        <input type="number" id="gaeste" name="gaeste" placeholder="1" min="1" value="1" required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Namen der Gäste</label>
-                        <textarea name="namen"></textarea>
+                        <label for="namen">Namen der Gäste</label>
+                        <textarea id="namen" name="namen" placeholder="Namen der Gäste"></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label>Allergene</label>
-                        <input type="text" name="allergene">
+                        <label for="allergene">Allergene</label>
+                        <input type="text" id="allergene" name="allergene" placeholder="Allergene">
                     </div>
                     
                     <button type="submit" class="submit-btn" id="submitBtn">Absenden</button>
@@ -739,7 +741,7 @@
             }
         });
 
-        // Form Submission with Formspree
+        // Formspark Form Submission
         const form = document.getElementById('rsvpForm');
         const submitBtn = document.getElementById('submitBtn');
         const formMessage = document.getElementById('formMessage');
@@ -756,13 +758,20 @@
             formMessage.style.display = 'none';
             
             try {
-                const formData = new FormData(form);
                 const response = await fetch('https://submit-form.com/DNvLkHYjm', {
                     method: 'POST',
-                    body: formData,
                     headers: {
+                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({
+                        vorname: form.vorname.value,
+                        nachname: form.nachname.value,
+                        zusage: form.zusage.value,
+                        gaeste: form.gaeste.value,
+                        namen: form.namen.value,
+                        allergene: form.allergene.value
+                    })
                 });
                 
                 if (response.ok) {
