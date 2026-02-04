@@ -530,6 +530,52 @@
             border: none;
         }
 
+        /* Dresscode Section */
+        .dresscode-box {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .dresscode-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffb3c6;
+            margin-bottom: 1.5rem;
+        }
+
+        .dresscode-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ffb3c6;
+            margin-bottom: 3rem;
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding: 2rem 0;
+        }
+
+        .color-swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
         /* Trauzeugen */
         .trauzeugen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 800px; margin: 0 auto; }
         .trauzeuge-card { padding: 2rem; text-align: center; transition: transform 0.3s ease; animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
@@ -714,6 +760,15 @@
             .location-map-full {
                 height: 350px;
             }
+
+            .color-palette {
+                gap: 1rem;
+            }
+
+            .color-swatch {
+                width: 60px;
+                height: 60px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -862,6 +917,26 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
 
                 <div class="location-map-full">
                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.820616083929!2d8.4447176!3d50.05219160000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bda1f748f95527%3A0xf9759d2b18c7f845!2sRestaurant%20Zum%20Wilden%20Esel!5e0!3m2!1sen!2sde!4v1770239326071!5m2!1sen!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
+        </section>
+
+        <section id="dresscode" class="bg-blue">
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <div class="container">
+                <h2 class="section-title">Dresscode</h2>
+                <div class="dresscode-box">
+                    <h3>Festlich Elegant</h3>
+                    <p class="dresscode-text">Wir freuen uns auf festliche, elegante Outfits. Als Inspiration für eure Kleiderwahl haben wir eine Farbpalette zusammengestellt:</p>
+                    <div class="color-palette">
+                        <div class="color-swatch" style="background: #FFB3D9;"></div>
+                        <div class="color-swatch" style="background: #FF1493;"></div>
+                        <div class="color-swatch" style="background: #89CFF0;"></div>
+                        <div class="color-swatch" style="background: #00008B;"></div>
+                        <div class="color-swatch" style="background: #808080;"></div>
+                        <div class="color-swatch" style="background: #FAF6F0;"></div>
+                    </div>
                 </div>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
@@ -1129,7 +1204,7 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
                 if(e.isIntersecting) e.target.style.animationPlayState = 'running'; 
             }); 
         });
-        document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item').forEach(el => { 
+        document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item, .dresscode-box').forEach(el => { 
             el.style.animationPlayState = 'paused'; 
             observer.observe(el); 
         });
