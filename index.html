@@ -106,7 +106,7 @@
         .password-date {
             font-family: 'BohemeFloral', cursive;
             font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--flamingo);
+            color: var(--gold);
             margin-bottom: 2.5rem;
             letter-spacing: 0.1em;
         }
@@ -351,7 +351,7 @@
         .intro-section { padding: 8rem 0 8rem 0; text-align: center; }
         .intro-heading { 
             font-family: 'BohemeFloral', cursive;
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: 3.5rem;
             letter-spacing: 0.05em;
             margin-bottom: 2rem; 
             opacity: 0; 
@@ -362,7 +362,7 @@
         
         .intro-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             font-weight: 400;
             line-height: 1.8;
             max-width: 900px;
@@ -426,17 +426,18 @@
         }
 
         .location-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            align-items: center;
             animation: fadeInUp 1s ease-out forwards;
             animation-delay: 0.3s;
             opacity: 0;
         }
 
         .location-text {
-            padding-right: 2rem;
+            max-width: 900px;
+            text-align: center;
         }
 
         .location-subtitle {
@@ -474,25 +475,6 @@
             line-height: 1.6;
         }
 
-        .location-dresscode {
-            margin-bottom: 2.5rem;
-        }
-
-        .location-dresscode h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a3a52;
-            margin-bottom: 0.5rem;
-        }
-
-        .location-dresscode p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-        }
-
         .maps-button {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -513,27 +495,13 @@
         }
 
         .location-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .location-image {
             width: 100%;
-            height: 350px;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .location-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 1200px;
         }
 
         .location-map {
             width: 100%;
-            height: 350px;
+            height: 450px;
             border-radius: 15px;
             overflow: hidden;
             border: 2px solid #e0e0e0;
@@ -551,7 +519,23 @@
         .trauzeuge-card:nth-child(1) { animation-delay: 0.2s; }
         .trauzeuge-card:nth-child(2) { animation-delay: 0.3s; }
         .trauzeuge-card:hover { transform: translateY(-8px); }
-        .trauzeuge-image { width: 160px; height: 160px; border-radius: 50%; background: #1a3a52; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; color: #ffb3c6; font-family: 'BohemeFloral', cursive; }
+        .trauzeuge-image { 
+            width: 160px; 
+            height: 160px; 
+            border-radius: 50%; 
+            background: #1a3a52; 
+            margin: 0 auto 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+            border: 4px solid #ffb3c6;
+        }
+        .trauzeuge-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .trauzeuge-name { font-family: 'BohemeFloral', cursive; font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; color: #1a3a52; }
         
         .trauzeuge-contact {
@@ -659,25 +643,17 @@
         footer { text-align: center; padding: 3rem 0; font-size: 0.9rem; position: relative; }
         footer .hearts { font-size: 1.5rem; margin-bottom: 0.5rem; }
 
-        @media (max-width: 968px) {
-            .location-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .location-text {
-                padding-right: 0;
-            }
-
-            .location-image,
-            .location-map {
-                height: 300px;
-            }
-        }
-
         @media (max-width: 768px) {
             .password-container {
                 padding: 3rem 2rem;
+            }
+
+            .intro-heading {
+                font-size: 2.5rem;
+            }
+
+            .intro-text {
+                font-size: 1.2rem;
             }
 
             .timeline::before { left: 40px; }
@@ -688,6 +664,10 @@
             section { padding: 4rem 0 7rem 0; }
             
             .trauzeugen-grid { grid-template-columns: 1fr; }
+
+            .location-map {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -784,17 +764,12 @@
                 <div class="location-content">
                     <div class="location-text">
                         <p class="location-description">
-                            Unsere Feier findet in der idyllischen Kirche von Rüdlingen und Buchberg statt, mit wunderschönem Blick auf den Rhein und das Flaachtal. Die Umgebung bietet eine perfekte Kulisse für unseren besonderen Tag.
+                            Unsere Hochzeitsfeier findet in der malerischen Kirche von Rüdlingen und Buchberg statt, einem idyllischen Ort mit herrlichem Blick auf den Rhein und das Flaachtal. Die charmante Umgebung bietet die perfekte Kulisse für unseren besonderen Tag und lädt zum Verweilen und Genießen ein.
                         </p>
                         
                         <div class="location-details">
                             <h4>Adresse:</h4>
                             <p>Dorfstrasse 2, 8454 Buchberg</p>
-                        </div>
-
-                        <div class="location-dresscode">
-                            <h4>Dresscode:</h4>
-                            <p>Festlich-elegant. Da die Zeremonie im Freien stattfindet, empfehlen wir bequeme Schuhe, um den Garten und die Natur genießen zu können.</p>
                         </div>
 
                         <a href="https://www.google.com/maps/place/Dorfstrasse+2,+8454+Buchberg,+Schweiz" target="_blank" class="maps-button">
@@ -803,9 +778,6 @@
                     </div>
 
                     <div class="location-visual">
-                        <div class="location-image">
-                            <img src="images/Location.webp" alt="Kirche Buchberg">
-                        </div>
                         <div class="location-map">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.8287954!2d8.6234!3d47.6984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479a9f0c0c0c0c0d%3A0x0!2sDorfstrasse%202%2C%208454%20Buchberg!5e0!3m2!1sde!2sde!4v1234567890" 
@@ -826,7 +798,9 @@
                 <h2 class="section-title">Unsere Trauzeugen</h2>
                 <div class="trauzeugen-grid">
                     <div class="trauzeuge-card">
-                        <div class="trauzeuge-image">G</div>
+                        <div class="trauzeuge-image">
+                            <img src="https://media.licdn.com/dms/image/v2/D4E03AQHNUVlDO0M50g/profile-displayphoto-scale_200_200/B4EZuyJR4rKsAc-/0/1768220338122?e=2147483647&v=beta&t=FIE_D02OQQtyp1ZPrvUmIo8hhAnsZQYCnbITvR3K-9o" alt="Patrick Gorbracht">
+                        </div>
                         <h3 class="trauzeuge-name">Patrick Gorbracht</h3>
                         <div class="trauzeuge-contact">
                             <a href="tel:+491234567890" class="contact-icon" title="Anrufen">
@@ -844,7 +818,9 @@
                     </div>
                     
                     <div class="trauzeuge-card">
-                        <div class="trauzeuge-image">H</div>
+                        <div class="trauzeuge-image">
+                            <img src="images/hannah.jpeg" alt="Hannah Wittmann">
+                        </div>
                         <h3 class="trauzeuge-name">Hannah Wittmann</h3>
                         <div class="trauzeuge-contact">
                             <a href="mailto:hannah.wittmann13@gmail.com" class="contact-icon" title="E-Mail senden">
