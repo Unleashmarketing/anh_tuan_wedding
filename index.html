@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. SCHRIFTART EINBINDEN --- */
         @font-face {
             font-family: 'BohemeFloral';
             src: url('DFVN Boheme Floral.otf') format('opentype');
@@ -26,11 +25,7 @@
             --gold: #cda72e;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Playfair Display', serif;
@@ -41,25 +36,35 @@
             position: relative;
         }
         
-        /* --- Globale Regel für Überschriften --- */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'BohemeFloral', cursive;
             font-weight: normal;
         }
 
-        /* Password Screen */
+        /* =============================================
+           ENVELOPE PASSWORD SCREEN
+        ============================================= */
         #password-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5573 100%);
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5573 50%, #1a3a52 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+        }
+
+        #password-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,179,198,0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(75,170,255,0.08) 0%, transparent 40%);
+            pointer-events: none;
         }
 
         #password-screen.hidden {
@@ -67,262 +72,399 @@
             visibility: hidden;
         }
 
-        .password-container {
-            background: rgba(255, 179, 198, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 179, 198, 0.3);
-            border-radius: 20px;
-            padding: 4rem 3rem;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .password-names {
-            font-family: 'BohemeFloral', cursive;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: #ffb3c6;
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .password-ampersand {
-            color: var(--gold);
-            font-style: italic;
-            margin: 0 0.5rem;
-        }
-
-        .password-groom {
-            color: var(--azure);
-        }
-
-        .password-date {
-            font-family: 'BohemeFloral', cursive;
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--gold);
-            margin-bottom: 2.5rem;
-            letter-spacing: 0.1em;
-        }
-
-        .password-label {
-            font-size: 1rem;
-            color: #ffb3c6;
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-        }
-
-        .password-input-wrapper {
+        /* Scene wrapper */
+        .envelope-scene {
             position: relative;
-            margin-bottom: 1.5rem;
+            width: 480px;
+            max-width: 88vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: envelopeDrop 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes envelopeDrop {
+            from { opacity: 0; transform: translateY(-60px) scale(0.9); }
+            to   { opacity: 1; transform: translateY(0)    scale(1);   }
+        }
+
+        /*
+         * ENVELOPE STRUCTURE
+         * ─────────────────────────────────────────
+         *  .envelope-wrap  — outer container, sets size via padding-bottom trick
+         *    .card          — white card, z-index 1 (lowest)
+         *    .flap-south    — bottom triangle,  z-index 3 (always on top)
+         *    .flap-west     — left  triangle,   z-index 3
+         *    .flap-east     — right triangle,   z-index 3
+         *    .flap-north    — top   triangle,   z-index 4 closed → z-index 2 open
+         *    .envelope-seal — wax seal,         z-index 5
+         *
+         *  The north flap ROTATES around its top edge (transform-origin: top).
+         *  While closed it sits above the card. When open it flips back,
+         *  and because z-index drops below the card the card appears on top.
+         * ─────────────────────────────────────────
+         */
+
+        .envelope-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 66%;   /* aspect ratio ~3:2 */
+            filter: drop-shadow(0 25px 50px rgba(0,0,0,0.45));
+            cursor: pointer;
+        }
+
+        /* All direct children fill the same box */
+        .envelope-wrap > * {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+
+        /* ── WHITE CARD ── */
+        .card {
+            background: linear-gradient(160deg, #fffdf9 0%, #fff8f0 100%);
+            border-radius: 6px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.8rem 1.6rem;
+            overflow: hidden;
+            transform: translateY(0%);
+            /* transform delays 0.5s (flap opens first), z-index flips at 0.45s when flap passes 90° */
+            transition: transform 1s cubic-bezier(0.34, 1.3, 0.64, 1) 0.5s,
+                        z-index 0s linear 0.45s;
+        }
+
+        /* Card slides up out of envelope after flap opens */
+        .envelope-wrap.open .card {
+            transform: translateY(-58%);
+            z-index: 3;  /* above north flap (z-index 2) once it has flipped back */
+        }
+
+        .card::before {
+            content: '✿ ✦ ✿';
+            position: absolute;
+            top: 0.7rem; left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            color: var(--flamingo);
+            letter-spacing: 0.45em;
+            opacity: 0.5;
+            white-space: nowrap;
+        }
+
+        .card::after {
+            content: '✿ ✦ ✿';
+            position: absolute;
+            bottom: 0.7rem; left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            color: var(--flamingo);
+            letter-spacing: 0.45em;
+            opacity: 0.5;
+            white-space: nowrap;
+        }
+
+        /* ── SOUTH FLAP (bottom triangle) ── always on top of card */
+        .flap-south {
+            z-index: 3;
+            background: linear-gradient(170deg, #f0a0bc 0%, #e08aaa 100%);
+            clip-path: polygon(0% 100%, 50% 44%, 100% 100%);
+        }
+
+        /* ── WEST FLAP (left triangle) ── always on top of card */
+        .flap-west {
+            z-index: 3;
+            background: linear-gradient(135deg, #ffc8d8 0%, #ffaac4 100%);
+            clip-path: polygon(0% 0%, 0% 100%, 50% 44%);
+        }
+
+        /* ── EAST FLAP (right triangle) ── always on top of card */
+        .flap-east {
+            z-index: 3;
+            background: linear-gradient(225deg, #ffb8cc 0%, #ffa0bc 100%);
+            clip-path: polygon(100% 0%, 50% 44%, 100% 100%);
+        }
+
+        /* ── NORTH FLAP (top triangle / lid) ── */
+        .flap-north {
+            z-index: 4;                          /* above card when CLOSED */
+            background: linear-gradient(175deg, #ff8fb5 0%, #ff6b9d 60%, #e5568a 100%);
+            clip-path: polygon(0% 0%, 50% 56%, 100% 0%);
+            transform-origin: top center;
+            transform: rotateX(0deg);
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                        z-index 0s linear 0.45s;   /* z-index flips at halfway point */
+        }
+
+        /* ── OPEN STATE ── */
+        .envelope-wrap.open .flap-north {
+            transform: rotateX(180deg);
+            z-index: 2;   /* now BELOW the card so card appears on top */
+        }
+
+        /* ── WAX SEAL ── */
+        .envelope-seal {
+            width: 54px;
+            height: 54px;
+            background: radial-gradient(circle at 35% 35%, #e8c84a 0%, #cda72e 50%, #a8831a 100%);
+            border-radius: 50%;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 3px rgba(255,255,255,0.4);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            /* Position seal in center, slightly below midpoint */
+            top: auto !important;
+            bottom: 24%;
+            left: 50% !important;
+            width: 54px !important;
+            height: 54px !important;
+            margin-left: -27px;
+        }
+
+        .envelope-wrap.open .envelope-seal {
+            opacity: 0;
+            transform: scale(0.4);
+        }
+
+        /* ── CARD CONTENT ── */
+        .card-content {
+            width: 100%;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .card-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-names {
+            font-family: 'BohemeFloral', cursive;
+            font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+            color: #1a3a52;
+            text-align: center;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.03em;
+            line-height: 1.2;
+        }
+
+        .card-ampersand { color: var(--gold); font-style: italic; }
+        .card-groom     { color: var(--azure); }
+
+        .card-date {
+            font-family: 'BohemeFloral', cursive;
+            font-size: clamp(0.9rem, 2vw, 1.25rem);
+            color: var(--gold);
+            text-align: center;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .card-divider {
+            width: 60px; height: 1px;
+            background: linear-gradient(to right, transparent, var(--flamingo), transparent);
+            margin: 0 auto 1rem;
+        }
+
+        .card-password-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+
+        .card-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 0.7rem;
         }
 
         .password-input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            border: 2px solid rgba(255, 179, 198, 0.4);
+            padding: 0.75rem 1.2rem;
+            border: 1.5px solid rgba(255, 107, 157, 0.35);
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255,255,255,0.95);
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             text-align: center;
+            color: #1a3a52;
             transition: all 0.3s ease;
+            outline: none;
         }
 
         .password-input:focus {
-            outline: none;
             border-color: var(--flamingo);
-            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+            box-shadow: 0 0 0 3px rgba(255,107,157,0.12);
         }
 
         .password-submit {
             width: 100%;
-            padding: 1rem 2rem;
-            background: var(--flamingo);
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--flamingo), #ff8fb5);
             color: white;
             border: none;
             border-radius: 50px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            letter-spacing: 0.05em;
         }
 
         .password-submit:hover {
-            background: #ff5589;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+            box-shadow: 0 6px 20px rgba(255,107,157,0.4);
+            background: linear-gradient(135deg, #ff5589, #ff6b9d);
         }
 
         .password-error {
-            color: #ff4444;
-            font-size: 0.9rem;
-            margin-top: 1rem;
+            color: #e0304a;
+            font-size: 0.78rem;
+            text-align: center;
+            margin-top: 0.5rem;
             opacity: 0;
             transition: opacity 0.3s ease;
+            font-family: 'Playfair Display', serif;
         }
 
-        .password-error.show {
-            opacity: 1;
+        .password-error.show { opacity: 1; }
+
+        /* Hint below envelope */
+        .envelope-hint {
+            margin-top: 1.8rem;
+            color: rgba(255,179,198,0.75);
+            font-size: 0.82rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-align: center;
+            animation: hintPulse 2s ease-in-out infinite;
+            font-family: 'Playfair Display', serif;
+            transition: opacity 0.4s ease;
         }
 
+        .envelope-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes hintPulse {
+            0%,100% { opacity: 0.65; transform: translateY(0); }
+            50%      { opacity: 1;    transform: translateY(-3px); }
+        }
+
+        /* Floating hearts */
+        .floating-hearts {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            opacity: 0;
+            animation: floatHeart linear infinite;
+        }
+
+        @keyframes floatHeart {
+            0%   { opacity: 0;   transform: translateY(100vh) rotate(0deg)   scale(0.5); }
+            8%   { opacity: 0.6; }
+            92%  { opacity: 0.25; }
+            100% { opacity: 0;   transform: translateY(-8vh)  rotate(360deg) scale(1.1); }
+        }
+
+                @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+
+        /* =============================================
+           MAIN CONTENT
+        ============================================= */
         #main-content {
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.8s ease;
         }
 
-        #main-content.visible {
-            opacity: 1;
-        }
+        #main-content.visible { opacity: 1; }
 
         .section-divider {
-            width: 100%;
-            height: auto;
-            display: block;
-            position: absolute;
-            left: 0;
-            z-index: 5;
-            pointer-events: none;
+            width: 100%; height: auto;
+            display: block; position: absolute;
+            left: 0; z-index: 5; pointer-events: none;
         }
 
         .divider-bottom { bottom: -1px; }
         .divider-top { top: -1px; transform: rotate(180deg); }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        /* Hero Section */
         .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
+            position: relative; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden;
         }
         
-        .hero-image {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(26, 58, 82, 0.7);
-            z-index: 1;
-        }
+        .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 58, 82, 0.7); z-index: 1; }
         
         .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            padding: 2rem;
+            position: relative; z-index: 2; color: white; padding: 2rem;
             animation: fadeInUp 1.5s ease-out;
         }
         
         .hero-names {
             font-family: 'BohemeFloral', cursive;
             font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: normal;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            text-shadow: none;
-            animation: fadeIn 1.5s ease-out forwards;
-            opacity: 0;
+            font-weight: normal; letter-spacing: 0.05em; margin-bottom: 0.5rem;
+            animation: fadeIn 1.5s ease-out forwards; opacity: 0;
         }
         
-        .ampersand {
-            font-style: italic;
-            font-weight: 400;
-            display: inline-block;
-            margin: 0 0.5rem;
-            color: var(--gold);
-        }
-
-        .groom-name {
-            color: var(--azure);
-            font-weight: 400;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
+        .ampersand { font-style: italic; font-weight: 400; display: inline-block; margin: 0 0.5rem; color: var(--gold); }
+        .groom-name { color: var(--azure); font-weight: 400; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 
         .hero-date {
             font-family: 'BohemeFloral', cursive;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: var(--gold);
-            margin-bottom: 3rem;
-            letter-spacing: 0.1em;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.3s;
-            opacity: 0;
+            font-size: clamp(2rem, 5vw, 3.5rem); color: var(--gold);
+            margin-bottom: 3rem; letter-spacing: 0.1em;
+            animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; opacity: 0;
         }
         
         .countdown-container {
             margin-top: 2rem;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.5s;
-            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards; animation-delay: 0.5s; opacity: 0;
         }
         
-        .countdown-label {
-            font-size: 1rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-        
-        .countdown {
-            display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-        }
-        
+        .countdown-label { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; opacity: 0.9; }
+        .countdown { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
         .countdown-item { text-align: center; }
+        .countdown-number { font-family: 'BohemeFloral', cursive; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1; display: block; }
+        .countdown-text { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.5rem; opacity: 0.8; }
         
-        .countdown-number {
-            font-family: 'BohemeFloral', cursive;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 600;
-            line-height: 1;
-            display: block;
-        }
-        
-        .countdown-text {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-        
-        .container {
-            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-            position: relative; z-index: 1;
-        }
-        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
         section { padding: 8rem 0 9rem 0; position: relative; z-index: 1; }
         
         .bg-blue { background: #1a3a52; }
-        .bg-blue .section-title, .bg-blue .intro-heading, .bg-blue .intro-text,
-        .bg-blue .intro-details, .bg-blue .countdown-label, .bg-blue .countdown-number,
-        .bg-blue .countdown-text, .bg-blue .hero-names, .bg-blue footer { color: #ffb3c6; }
+        .bg-blue .section-title, .bg-blue .intro-heading, .bg-blue .intro-text, .bg-blue .intro-details,
+        .bg-blue .countdown-label, .bg-blue .countdown-number, .bg-blue .countdown-text,
+        .bg-blue .hero-names, .bg-blue footer { color: #ffb3c6; }
         
         .bg-pink { background: #ffb3c6; }
         .bg-pink .section-title, .bg-pink .intro-heading, .bg-pink .intro-text, .bg-pink .intro-details { color: #1a3a52; }
@@ -332,49 +474,31 @@
         
         .section-title {
             font-family: 'BohemeFloral', cursive;
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 300;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.2s;
-            opacity: 0;
+            font-size: clamp(3rem, 6vw, 5rem); font-weight: 300;
+            text-align: center; margin-bottom: 3rem; position: relative;
+            animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.2s; opacity: 0;
         }
         
         .section-title::after {
             content: ''; position: absolute; bottom: -1rem; left: 50%;
-            transform: translateX(-50%); width: 80px; height: 3px;
-            background: var(--flamingo);
+            transform: translateX(-50%); width: 80px; height: 3px; background: var(--flamingo);
         }
         
         .intro-section { padding: 8rem 0 8rem 0; text-align: center; }
-        .intro-heading { 
-            font-family: 'BohemeFloral', cursive;
-            font-size: 3.5rem;
-            letter-spacing: 0.05em;
-            margin-bottom: 2rem; 
-            opacity: 0; 
-            animation: fadeInUp 0.8s ease-out forwards; 
-            animation-delay: 0.3s; 
-            font-weight: 300;
+        .intro-heading {
+            font-family: 'BohemeFloral', cursive; font-size: 3.5rem;
+            letter-spacing: 0.05em; margin-bottom: 2rem; opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; font-weight: 300;
         }
         
         .intro-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 400;
-            line-height: 1.8;
-            max-width: 900px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.5s;
-            opacity: 0;
+            font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400;
+            line-height: 1.8; max-width: 900px; margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.5s; opacity: 0;
         }
         
         .intro-details { margin-top: 2.5rem; font-size: 1.1rem; line-height: 1.8; max-width: 700px; margin-left: auto; margin-right: auto; }
         
-        /* Timeline */
         .timeline { max-width: 1000px; margin: 0 auto; position: relative; padding: 4rem 0; }
         .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 2px; background: rgba(255, 179, 198, 0.3); z-index: 1; }
         
@@ -387,318 +511,60 @@
         
         .timeline-item:nth-child(odd) .timeline-content-wrapper { grid-column: 1; text-align: right; }
         .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 3; text-align: left; }
-        .timeline-icon { 
-            width: 80px; 
-            height: 80px; 
-            background: var(--flamingo); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 2rem; 
-            color: var(--azure); 
-            position: relative; 
-            z-index: 2; 
-            flex-shrink: 0; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 15px #1a3a52; 
-        }        
+        .timeline-icon { width: 80px; height: 80px; background: var(--flamingo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--azure); position: relative; z-index: 2; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 15px #1a3a52; }
         .timeline-spacer { width: 100%; }
-        
-        .timeline-content-wrapper h3 { 
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem; 
-            font-weight: 600; 
-            color: #ffb3c6; 
-            margin-bottom: 0.5rem; 
-        }
+        .timeline-content-wrapper h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: #ffb3c6; margin-bottom: 0.5rem; }
         .timeline-time { font-size: 1rem; font-weight: 500; color: #ffb3c6; margin-bottom: 0.5rem; }
         .timeline-content-wrapper p { color: #ffb3c6; font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
 
-        /* Location Section */
-        .location-section {
-            padding: 8rem 0 9rem 0;
-        }
+        .location-section { padding: 8rem 0 9rem 0; }
+        .location-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .location-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; opacity: 0; margin-bottom: 3rem; }
+        .location-text { padding-right: 2rem; }
+        .location-subtitle { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; color: #1a3a52; margin-bottom: 2rem; }
+        .location-description { font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.8; color: #666; margin-bottom: 2.5rem; }
+        .location-details { margin-bottom: 2.5rem; }
+        .location-details h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: #1a3a52; margin-bottom: 0.5rem; }
+        .location-details p { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #666; line-height: 1.6; }
+        .maps-button { display: inline-block; padding: 1rem 2.5rem; background: var(--flamingo); color: white; text-decoration: none; border-radius: 50px; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; transition: all 0.3s ease; }
+        .maps-button:hover { background: #ff5589; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4); }
+        .location-visual { display: flex; flex-direction: column; gap: 1.5rem; }
+        .location-image { width: 100%; height: 350px; border-radius: 15px; overflow: hidden; }
+        .location-image img { width: 100%; height: 100%; object-fit: cover; }
+        .location-map-full { width: 100%; height: 450px; border-radius: 15px; overflow: hidden; border: 2px solid #e0e0e0; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.5s; opacity: 0; }
+        .location-map-full iframe { width: 100%; height: 100%; border: none; }
 
-        .location-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        .dresscode-box { max-width: 800px; margin: 0 auto; text-align: center; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.4s; opacity: 0; }
+        .dresscode-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; line-height: 1.8; color: #ffb3c6; margin-bottom: 3rem; }
+        .color-palette { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; padding: 2rem 0; }
+        .color-swatch { width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease; }
+        .color-swatch:hover { transform: scale(1.1); }
 
-        .location-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.3s;
-            opacity: 0;
-            margin-bottom: 3rem;
-        }
-
-        .location-text {
-            padding-right: 2rem;
-        }
-
-        .location-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 600;
-            color: #1a3a52;
-            margin-bottom: 2rem;
-        }
-
-        .location-description {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #666;
-            margin-bottom: 2.5rem;
-        }
-
-        .location-details {
-            margin-bottom: 2.5rem;
-        }
-
-        .location-details h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a3a52;
-            margin-bottom: 0.5rem;
-        }
-
-        .location-details p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .maps-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--flamingo);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .maps-button:hover {
-            background: #ff5589;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
-        }
-
-        .location-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .location-image {
-            width: 100%;
-            height: 350px;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .location-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .location-map-full {
-            width: 100%;
-            height: 450px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid #e0e0e0;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.5s;
-            opacity: 0;
-        }
-
-        .location-map-full iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Dresscode Section */
-        .dresscode-box {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.4s;
-            opacity: 0;
-        }
-
-        .dresscode-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #ffb3c6;
-            margin-bottom: 3rem;
-        }
-
-        .color-palette {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            padding: 2rem 0;
-        }
-
-        .color-swatch {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .color-swatch:hover {
-            transform: scale(1.1);
-        }
-
-        /* Trauzeugen */
         .trauzeugen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 800px; margin: 0 auto; }
         .trauzeuge-card { padding: 2rem; text-align: center; transition: transform 0.3s ease; animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
         .trauzeuge-card:nth-child(1) { animation-delay: 0.2s; }
         .trauzeuge-card:nth-child(2) { animation-delay: 0.3s; }
         .trauzeuge-card:hover { transform: translateY(-8px); }
-        .trauzeuge-image { 
-            width: 160px; 
-            height: 160px; 
-            border-radius: 50%; 
-            background: #1a3a52; 
-            margin: 0 auto 1.5rem; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-            border: 4px solid #ffb3c6;
-        }
-        .trauzeuge-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .trauzeuge-image { width: 160px; height: 160px; border-radius: 50%; background: #1a3a52; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 4px solid #ffb3c6; }
+        .trauzeuge-image img { width: 100%; height: 100%; object-fit: cover; }
         .trauzeuge-name { font-family: 'BohemeFloral', cursive; font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; color: #1a3a52; }
-        
-        .trauzeuge-contact {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-        }
+        .trauzeuge-contact { display: flex; gap: 1rem; justify-content: center; align-items: center; }
+        .contact-icon { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: #1a3a52; color: #ffb3c6; text-decoration: none; transition: all 0.3s ease; }
+        .contact-icon:hover { background: var(--flamingo); color: white; transform: scale(1.1); }
+        .contact-icon svg { width: 20px; height: 20px; }
 
-        .contact-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #1a3a52;
-            color: #ffb3c6;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+        .faq-section { padding: 8rem 0 9rem 0; }
+        .faq-container { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+        .faq-item { background: rgba(255, 179, 198, 0.1); border: 2px solid rgba(255, 179, 198, 0.3); border-radius: 12px; margin-bottom: 1.5rem; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; overflow: hidden; transition: all 0.3s ease; }
+        .faq-question-wrapper { padding: 1.5rem 2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
+        .faq-question-wrapper:hover { background: rgba(255, 179, 198, 0.15); }
+        .faq-question { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: #1a3a52; margin: 0; }
+        .faq-toggle { font-size: 1.5rem; color: var(--flamingo); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 1rem; }
+        .faq-item.active .faq-toggle { transform: rotate(45deg); }
+        .faq-answer-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-item.active .faq-answer-wrapper { max-height: 500px; }
+        .faq-answer { font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.8; color: #666; padding: 0 2rem 1.5rem 2rem; }
 
-        .contact-icon:hover {
-            background: var(--flamingo);
-            color: white;
-            transform: scale(1.1);
-        }
-
-        .contact-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            padding: 8rem 0 9rem 0;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .faq-item {
-            background: rgba(255, 179, 198, 0.1);
-            border: 2px solid rgba(255, 179, 198, 0.3);
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.3s;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question-wrapper {
-            padding: 1.5rem 2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-
-        .faq-question-wrapper:hover {
-            background: rgba(255, 179, 198, 0.15);
-        }
-
-        .faq-question {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a3a52;
-            margin: 0;
-        }
-
-        .faq-toggle {
-            font-size: 1.5rem;
-            color: var(--flamingo);
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-            margin-left: 1rem;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer-wrapper {
-            max-height: 500px;
-        }
-
-        .faq-answer {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #666;
-            padding: 0 2rem 1.5rem 2rem;
-        }
-
-        /* RSVP */
         .rsvp-form { max-width: 700px; margin: 0 auto; padding: 3rem; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
         .form-group { margin-bottom: 1.5rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #ffb3c6; }
@@ -710,123 +576,100 @@
         .submit-btn:hover { background: #ff9eb8; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 179, 198, 0.4); }
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        /* Form Success/Error Messages */
-        .form-message {
-            margin-top: 1.5rem;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 500;
-            display: none;
-        }
-        .form-message.success {
-            background: rgba(75, 181, 67, 0.2);
-            border: 2px solid rgba(75, 181, 67, 0.5);
-            color: #4bb543;
-            display: block;
-        }
-        .form-message.error {
-            background: rgba(255, 68, 68, 0.2);
-            border: 2px solid rgba(255, 68, 68, 0.5);
-            color: #ff4444;
-            display: block;
-        }
+        .form-message { margin-top: 1.5rem; padding: 1rem 1.5rem; border-radius: 10px; text-align: center; font-weight: 500; display: none; }
+        .form-message.success { background: rgba(75, 181, 67, 0.2); border: 2px solid rgba(75, 181, 67, 0.5); color: #4bb543; display: block; }
+        .form-message.error { background: rgba(255, 68, 68, 0.2); border: 2px solid rgba(255, 68, 68, 0.5); color: #ff4444; display: block; }
 
         footer { text-align: center; padding: 5rem 0 3rem; font-size: 0.9rem; position: relative; }
         footer .hearts { font-size: 1.5rem; margin-bottom: 0.5rem; }
 
         @media (max-width: 968px) {
-            .location-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .location-text {
-                padding-right: 0;
-            }
-
-            .location-image {
-                height: 300px;
-            }
-
-            .location-map-full {
-                height: 350px;
-            }
-
-            .color-palette {
-                gap: 1rem;
-            }
-
-            .color-swatch {
-                width: 60px;
-                height: 60px;
-            }
+            .location-content { grid-template-columns: 1fr; gap: 3rem; }
+            .location-text { padding-right: 0; }
+            .location-image { height: 300px; }
+            .location-map-full { height: 350px; }
+            .color-palette { gap: 1rem; }
+            .color-swatch { width: 60px; height: 60px; }
         }
 
         @media (max-width: 768px) {
-            .password-container {
-                padding: 3rem 2rem;
-            }
-
-            .intro-heading {
-                font-size: 2.5rem;
-            }
-
-            .intro-text {
-                font-size: 1.2rem;
-            }
-
+            .envelope-scene { max-width: 88vw; }
+            .intro-heading { font-size: 2.5rem; }
+            .intro-text { font-size: 1.2rem; }
             .timeline::before { left: 40px; }
             .timeline-item { grid-template-columns: auto 1fr; gap: 1.5rem; }
-            .timeline-item:nth-child(odd) .timeline-content-wrapper, .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 2; text-align: left; }
-            .timeline-item:nth-child(odd) .timeline-icon, .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
+            .timeline-item:nth-child(odd) .timeline-content-wrapper,
+            .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 2; text-align: left; }
+            .timeline-item:nth-child(odd) .timeline-icon,
+            .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
             .timeline-spacer { display: none; }
             section { padding: 4rem 0 7rem 0; }
-            
             .trauzeugen-grid { grid-template-columns: 1fr; }
-
-            .faq-question {
-                font-size: 1.1rem;
-            }
-
-            .faq-answer {
-                font-size: 0.95rem;
-            }
+            .faq-question { font-size: 1.1rem; }
+            .faq-answer { font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Password Screen -->
+
+    <!-- Password Screen with Envelope Animation -->
     <div id="password-screen">
-        <div class="password-container">
-            <h1 class="password-names">
-                Ngọc Anh <span class="password-ampersand">&</span> <span class="password-groom">Anh Tuấn</span>
-            </h1>
-            <p class="password-date">20. Juni 2026</p>
-            
-            <p class="password-label">Bitte gib das Passwort ein</p>
-            
-            <div class="password-input-wrapper">
-                <input 
-                    type="password" 
-                    id="password-input" 
-                    class="password-input" 
-                    placeholder="Passwort"
-                    autocomplete="off"
-                >
-            </div>
-            
-            <button type="button" id="password-submit" class="password-submit">
-                Eintreten
-            </button>
-            
-            <p class="password-error" id="password-error">
-                Falsches Passwort. Bitte versuche es erneut.
-            </p>
+        <div class="floating-hearts" id="floatingHearts"></div>
+
+        <div class="envelope-scene">
+
+            <div class="envelope-wrap" id="envelopeWrap">
+
+                <!-- 1. White card: z-index 1, always at the bottom of the stack -->
+                <div class="card" id="envelopeCard">
+                    <div class="card-content" id="cardContent">
+                        <h1 class="card-names">
+                            Ngọc Anh <span class="card-ampersand">&</span> <span class="card-groom">Anh Tuấn</span>
+                        </h1>
+                        <p class="card-date">20. Juni 2026</p>
+                        <div class="card-divider"></div>
+                        <p class="card-password-label">Bitte gib das Passwort ein</p>
+                        <div class="card-input-wrapper">
+                            <input
+                                type="password"
+                                id="password-input"
+                                class="password-input"
+                                placeholder="Passwort"
+                                autocomplete="off"
+                            >
+                        </div>
+                        <button type="button" id="password-submit" class="password-submit">
+                            Eintreten ♥
+                        </button>
+                        <p class="password-error" id="password-error">
+                            Falsches Passwort. Bitte versuche es erneut.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. South flap: z-index 3, always above card -->
+                <div class="flap-south"></div>
+
+                <!-- 3. West flap: z-index 3, always above card -->
+                <div class="flap-west"></div>
+
+                <!-- 4. East flap: z-index 3, always above card -->
+                <div class="flap-east"></div>
+
+                <!-- 5. North flap (lid): z-index 4 closed → z-index 2 open -->
+                <div class="flap-north"></div>
+
+                <!-- 6. Wax seal: z-index 5 -->
+                <div class="envelope-seal">♥</div>
+
+            </div><!-- end .envelope-wrap -->
+
+            <p class="envelope-hint" id="envelopeHint">✦ Klicke auf den Umschlag ✦</p>
+
         </div>
     </div>
 
-    <!-- Main Content -->
+        <!-- Main Content -->
     <div id="main-content">
         <section class="hero bg-blue">
             <img src="images/Tuan -Anh2403.JPG" alt="Wedding" class="hero-image">
@@ -887,28 +730,22 @@
                 <h2 class="section-title">Location & Anfahrt</h2>
                 <div class="location-content">
                     <div class="location-text">
-                        <p class="location-description">
-Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flörsheim-Weilbach statt, das im Regionalparkhaus-Portal inmitten der wunderschönen Weilbacher Kiesgrubenlandschaft liegt. Die außergewöhnliche Atmosphäre und die naturnahe Umgebung bieten die perfekte Kulisse für unseren besonderen Tag.</p>
+                        <p class="location-description">Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flörsheim-Weilbach statt, das im Regionalparkhaus-Portal inmitten der wunderschönen Weilbacher Kiesgrubenlandschaft liegt. Die außergewöhnliche Atmosphäre und die naturnahe Umgebung bieten die perfekte Kulisse für unseren besonderen Tag.</p>
                         <div class="location-details">
                             <h4>Adresse:</h4>
                             <p>Zum Wilden Esel</p>
                             <p>Frankfurter Str. 76, 65439 Flörsheim am Main</p>
                         </div>
-
-                        <a href="https://maps.app.goo.gl/SckuwXU1D7ugmx8k8" target="_blank" class="maps-button">
-                            Google Maps öffnen
-                        </a>
+                        <a href="https://maps.app.goo.gl/SckuwXU1D7ugmx8k8" target="_blank" class="maps-button">Google Maps öffnen</a>
                     </div>
-
                     <div class="location-visual">
                         <div class="location-image">
-                            <img src="images/Location.webp" alt="Kirche Buchberg">
+                            <img src="images/Location.webp" alt="Location">
                         </div>
                     </div>
                 </div>
-
                 <div class="location-map-full">
-                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.820616083929!2d8.4447176!3d50.05219160000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bda1f748f95527%3A0xf9759d2b18c7f845!2sRestaurant%20Zum%20Wilden%20Esel!5e0!3m2!1sen!2sde!4v1770239326071!5m2!1sen!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.820616083929!2d8.4447176!3d50.05219160000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bda1f748f95527%3A0xf9759d2b18c7f845!2sRestaurant%20Zum%20Wilden%20Esel!5e0!3m2!1sen!2sde!4v1770239326071!5m2!1sen!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
@@ -949,7 +786,7 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                                 </svg>
                             </a>
-                            <a href="mailto:pgorbracht@googlemail.com" class="contact-icon" title="E-Mail senden">
+                            <a href="/cdn-cgi/l/email-protection#28584f475a4a5a494b405c684f47474f444d45494144064b4745" class="contact-icon" title="E-Mail senden">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -957,14 +794,13 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
                             </a>
                         </div>
                     </div>
-                    
                     <div class="trauzeuge-card">
                         <div class="trauzeuge-image">
                             <img src="images/hannah.jpeg" alt="Hannah Wittmann">
                         </div>
                         <h3 class="trauzeuge-name">Hannah Wittmann</h3>
                         <div class="trauzeuge-contact">
-                            <a href="mailto:hannah.wittmann13@gmail.com" class="contact-icon" title="E-Mail senden">
+                            <a href="/cdn-cgi/l/email-protection#3b535a55555a53154c524f4f565a55550a087b5c565a525715585456" class="contact-icon" title="E-Mail senden">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -981,16 +817,13 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
             <div class="faq-container">
                 <h2 class="section-title">FAQ</h2>
-                
                 <div class="faq-item">
                     <div class="faq-question-wrapper">
                         <h3 class="faq-question">Was soll ich schenken?</h3>
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer-wrapper">
-                        <p class="faq-answer">
-                            Eure Anwesenheit ist das schönste Geschenk für uns! Falls ihr uns dennoch etwas schenken möchtet, würden wir uns über einen Beitrag zu unserer Hochzeitsreise freuen. Ein kleiner Umschlag ist herzlich willkommen, aber keinesfalls verpflichtend.
-                        </p>
+                        <p class="faq-answer">Eure Anwesenheit ist das schönste Geschenk für uns! Falls ihr uns dennoch etwas schenken möchtet, würden wir uns über einen Beitrag zu unserer Hochzeitsreise freuen. Ein kleiner Umschlag ist herzlich willkommen, aber keinesfalls verpflichtend.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -999,8 +832,7 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer-wrapper">
-                        <p class="faq-answer">
-                            Wir empfehlen die Anreise mit dem Auto, da das Gasthaus etwas abgelegen in der Natur liegt und mit öffentlichen Verkehrsmitteln schwer zu erreichen ist. Keine Sorge – ausreichend Parkplätze sind direkt vor Ort vorhanden!
+                        <p class="faq-answer">Wir empfehlen die Anreise mit dem Auto, da das Gasthaus etwas abgelegen in der Natur liegt und mit öffentlichen Verkehrsmitteln schwer zu erreichen ist. Keine Sorge – ausreichend Parkplätze sind direkt vor Ort vorhanden!</p>
                     </div>
                 </div>
             </div>
@@ -1016,57 +848,104 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
                         <label for="vorname">Vorname *</label>
                         <input type="text" id="vorname" name="vorname" placeholder="Vorname" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="nachname">Nachname *</label>
                         <input type="text" id="nachname" name="nachname" placeholder="Nachname" required>
                     </div>
-                    
                     <div class="form-group">
                         <label>Zusage *</label>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="zusage-ja" name="zusage" value="ja" required> 
+                                <input type="radio" id="zusage-ja" name="zusage" value="ja" required>
                                 <label for="zusage-ja">Ja</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="zusage-nein" name="zusage" value="nein"> 
+                                <input type="radio" id="zusage-nein" name="zusage" value="nein">
                                 <label for="zusage-nein">Nein</label>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="gaeste">Anzahl der Gäste *</label>
                         <input type="number" id="gaeste" name="gaeste" placeholder="1" min="1" value="1" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="namen">Namen der Gäste *</label>
                         <textarea id="namen" name="namen" placeholder="Namen der Gäste" required></textarea>
                     </div>
-                    
                     <div class="form-group">
                         <label for="allergene">Allergene</label>
                         <input type="text" id="allergene" name="allergene" placeholder="Allergene">
                     </div>
-                    
                     <button type="submit" class="submit-btn" id="submitBtn">Absenden</button>
-                    
                     <div class="form-message" id="formMessage"></div>
                 </form>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
         </section>
+
         <footer class="bg-pink">
-    <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
-    <p>Wir freuen uns!</p>
-    <p>Ngọc Anh & Anh Tuấn</p>
-</footer>
+            <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
+            <p>Wir freuen uns!</p>
+            <p>Ngọc Anh & Anh Tuấn</p>
+        </footer>
     </div>
 
-    <script>
-        // Password Protection
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // =============================================
+        // FLOATING HEARTS BACKGROUND
+        // =============================================
+        const heartsContainer = document.getElementById('floatingHearts');
+        const heartSymbols = ['♥', '✦', '✿', '♡', '❋'];
+        const heartColors = ['#ffb3c6', '#ffd6e5', '#cda72e', '#4baaff', '#FF6B9D'];
+
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.className = 'heart';
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (9 + Math.random() * 10) + 's';
+            heart.style.animationDelay = (Math.random() * 3) + 's';
+            heart.style.fontSize = (0.7 + Math.random() * 1.1) + 'rem';
+            heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 22000);
+        }
+
+        // Start hearts
+        for (let i = 0; i < 6; i++) setTimeout(createHeart, i * 500);
+        setInterval(createHeart, 1400);
+
+        // =============================================
+        // ENVELOPE ANIMATION
+        // =============================================
+        const envelopeWrap = document.getElementById('envelopeWrap');
+        const cardContent  = document.getElementById('cardContent');
+        const envelopeHint = document.getElementById('envelopeHint');
+        let envelopeOpened = false;
+
+        envelopeWrap.addEventListener('click', function() {
+            if (envelopeOpened) return;
+            envelopeOpened = true;
+
+            // Hide hint
+            envelopeHint.classList.add('hidden');
+
+            // Open: north flap rotates back, z-index swaps at halfway (0.45s)
+            envelopeWrap.classList.add('open');
+
+            // Show card content after flap opens + card slides up (~1.6s total)
+            setTimeout(() => {
+                cardContent.classList.add('visible');
+                setTimeout(() => {
+                    document.getElementById('password-input').focus();
+                }, 200);
+            }, 1600);
+        });
+
+        // =============================================
+        // PASSWORD PROTECTION
+        // =============================================
         const correctPassword = 'Bui2026';
         const passwordScreen = document.getElementById('password-screen');
         const mainContent = document.getElementById('main-content');
@@ -1074,131 +953,120 @@ Unsere Hochzeitsfeier findet im charmanten Gasthaus „Zum Wilden Esel" in Flör
         const passwordSubmit = document.getElementById('password-submit');
         const passwordError = document.getElementById('password-error');
 
-        // Check if user already authenticated
+        // Already authenticated?
         if (sessionStorage.getItem('authenticated') === 'true') {
             passwordScreen.classList.add('hidden');
             mainContent.classList.add('visible');
         }
 
         function checkPassword() {
-            const enteredPassword = passwordInput.value;
-            
-            if (enteredPassword === correctPassword) {
+            if (passwordInput.value === correctPassword) {
                 sessionStorage.setItem('authenticated', 'true');
-                passwordScreen.classList.add('hidden');
+                passwordScreen.style.transition = 'opacity 0.8s ease, visibility 0.8s ease';
+                passwordScreen.style.opacity = '0';
+                passwordScreen.style.visibility = 'hidden';
                 setTimeout(() => {
+                    passwordScreen.style.display = 'none';
                     mainContent.classList.add('visible');
-                }, 300);
+                }, 800);
             } else {
                 passwordError.classList.add('show');
+                passwordInput.style.animation = 'shake 0.4s ease';
                 passwordInput.value = '';
                 passwordInput.focus();
-                
                 setTimeout(() => {
                     passwordError.classList.remove('show');
+                    passwordInput.style.animation = '';
                 }, 3000);
             }
         }
 
         passwordSubmit.addEventListener('click', checkPassword);
-        
-        passwordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
+        passwordInput.addEventListener('keypress', e => { if (e.key === 'Enter') checkPassword(); });
 
-        // FAQ Toggle
+        // =============================================
+        // FAQ
+        // =============================================
         document.querySelectorAll('.faq-question-wrapper').forEach(item => {
             item.addEventListener('click', function() {
                 const faqItem = this.parentElement;
                 const isActive = faqItem.classList.contains('active');
-                
-                // Close all FAQs
-                document.querySelectorAll('.faq-item').forEach(faq => {
-                    faq.classList.remove('active');
-                });
-                
-                // Open clicked FAQ if it wasn't active
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
+                document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
+                if (!isActive) faqItem.classList.add('active');
             });
         });
 
-        // Formspark Form Submission
+        // =============================================
+        // RSVP FORM
+        // =============================================
         const form = document.getElementById('rsvpForm');
         const submitBtn = document.getElementById('submitBtn');
         const formMessage = document.getElementById('formMessage');
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Disable submit button
             submitBtn.disabled = true;
             submitBtn.textContent = 'Wird gesendet...';
-            
-            // Hide any previous messages
             formMessage.classList.remove('success', 'error');
             formMessage.style.display = 'none';
-            
             try {
-                const response = await fetch('https://submit-form.com/DNvLkHYjm', {
+                const res = await fetch('https://submit-form.com/DNvLkHYjm', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify({
-                        vorname: form.vorname.value,
-                        nachname: form.nachname.value,
-                        zusage: form.zusage.value,
-                        gaeste: form.gaeste.value,
-                        namen: form.namen.value,
-                        allergene: form.allergene.value
+                        vorname: form.vorname.value, nachname: form.nachname.value,
+                        zusage: form.zusage.value, gaeste: form.gaeste.value,
+                        namen: form.namen.value, allergene: form.allergene.value
                     })
                 });
-                
-                if (response.ok) {
+                if (res.ok) {
                     formMessage.textContent = 'Vielen Dank für deine Rückmeldung! Wir freuen uns auf dich! ❤️';
                     formMessage.classList.add('success');
                     form.reset();
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
+                } else throw new Error();
+            } catch {
                 formMessage.textContent = 'Ups! Es gab ein Problem beim Absenden. Bitte versuche es erneut.';
                 formMessage.classList.add('error');
             } finally {
-                // Re-enable submit button
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Absenden';
             }
         });
 
-        // Countdown Timer
+        // =============================================
+        // COUNTDOWN
+        // =============================================
         const weddingDate = new Date('2026-06-20T15:00:00').getTime();
         function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            document.getElementById('days').textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('minutes').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('seconds').textContent = Math.floor((distance % (1000 * 60)) / 1000);
+            const d = weddingDate - Date.now();
+            document.getElementById('days').textContent = Math.floor(d / 86400000);
+            document.getElementById('hours').textContent = Math.floor((d % 86400000) / 3600000);
+            document.getElementById('minutes').textContent = Math.floor((d % 3600000) / 60000);
+            document.getElementById('seconds').textContent = Math.floor((d % 60000) / 1000);
         }
-        setInterval(updateCountdown, 1000); 
+        setInterval(updateCountdown, 1000);
         updateCountdown();
-        
-        // Intersection Observer for Animations
-        const observer = new IntersectionObserver((entries) => { 
-            entries.forEach(e => { 
-                if(e.isIntersecting) e.target.style.animationPlayState = 'running'; 
-            }); 
+
+        // =============================================
+        // INTERSECTION OBSERVER
+        // =============================================
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
         });
-        document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item, .dresscode-box').forEach(el => { 
-            el.style.animationPlayState = 'paused'; 
-            observer.observe(el); 
+        document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item, .dresscode-box').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
         });
     </script>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+    </style>
 </body>
 </html>
