@@ -403,6 +403,24 @@
 
         #main-content.visible { opacity: 1; }
 
+        /* All animations in main-content are paused until .ready is added after password */
+        #main-content:not(.ready) *,
+        #main-content:not(.ready) .hero-names,
+        #main-content:not(.ready) .hero-date,
+        #main-content:not(.ready) .countdown-container,
+        #main-content:not(.ready) .section-title,
+        #main-content:not(.ready) .intro-heading,
+        #main-content:not(.ready) .intro-text,
+        #main-content:not(.ready) .timeline-item,
+        #main-content:not(.ready) .location-content,
+        #main-content:not(.ready) .location-map-full,
+        #main-content:not(.ready) .dresscode-box,
+        #main-content:not(.ready) .trauzeuge-card,
+        #main-content:not(.ready) .faq-item,
+        #main-content:not(.ready) .rsvp-form {
+            animation-play-state: paused !important;
+        }
+
         .section-divider {
             width: 100%; height: auto;
             display: block; position: absolute;
@@ -954,10 +972,7 @@
         const passwordError = document.getElementById('password-error');
 
         // Already authenticated?
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            passwordScreen.classList.add('hidden');
-            mainContent.classList.add('visible');
-        }
+        // sessionStorage check runs after all JS is initialized (see bottom of script)
 
         function checkPassword() {
             if (passwordInput.value === correctPassword) {
@@ -968,6 +983,7 @@
                 setTimeout(() => {
                     passwordScreen.style.display = 'none';
                     mainContent.classList.add('visible');
+                    initAnimations();
                 }, 800);
             } else {
                 passwordError.classList.add('show');
@@ -1048,15 +1064,35 @@
         updateCountdown();
 
         // =============================================
-        // INTERSECTION OBSERVER
+        // SESSION CHECK — runs here so initAnimations() is already defined
         // =============================================
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
-        });
-        document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item, .dresscode-box').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
-        });
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            passwordScreen.classList.add('hidden');
+            mainContent.classList.add('visible');
+            setTimeout(initAnimations, 50);
+        }
+
+        // =============================================
+        // INTERSECTION OBSERVER — only starts after password
+        // =============================================
+        function initAnimations() {
+            // Mark main content as ready — CSS :not(.ready) pause rule lifts
+            mainContent.classList.add('ready');
+
+            // IntersectionObserver for scroll-triggered elements
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section-title, .location-content, .trauzeuge-card, .rsvp-form, .faq-item, .dresscode-box').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        }
     </script>
 
     <style>
