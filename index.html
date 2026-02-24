@@ -406,6 +406,17 @@
             left: 0; z-index: 5; pointer-events: none;
         }
 
+        @media (max-width: 768px) {
+            .section-divider {
+                width: 170%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .divider-top {
+                transform: translateX(-50%) rotate(180deg);
+            }
+        }
+
         .divider-bottom { bottom: -1px; }
         .divider-top { top: -1px; transform: rotate(180deg); }
 
@@ -625,19 +636,23 @@
                 grid-template-columns: 56px 1fr;
                 gap: 1rem;
                 margin-bottom: 2.5rem;
+                align-items: center;
             }
             .timeline-item:nth-child(odd) .timeline-content-wrapper,
             .timeline-item:nth-child(even) .timeline-content-wrapper {
                 grid-column: 2;
+                grid-row: 1;
                 text-align: left;
             }
             .timeline-item:nth-child(odd) .timeline-icon,
             .timeline-item:nth-child(even) .timeline-icon {
                 grid-column: 1;
+                grid-row: 1;
                 width: 56px;
                 height: 56px;
                 font-size: 1.4rem;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 8px #1a3a52;
+                align-self: center;
             }
             .timeline-item:nth-child(odd) .timeline-icon img,
             .timeline-item:nth-child(even) .timeline-icon img { width: 28px !important; }
@@ -657,7 +672,14 @@
 
             /* --- Dresscode --- */
             .dresscode-text { font-size: 1rem; }
-            .color-palette { gap: 0.8rem; }
+            .color-palette {
+                gap: 0.8rem;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                justify-items: center;
+                max-width: 240px;
+                margin: 0 auto;
+            }
             .color-swatch { width: 52px; height: 52px; }
 
             /* --- Trauzeugen --- */
@@ -673,7 +695,7 @@
 
             /* --- RSVP Form --- */
             .rsvp-form { padding: 1.5rem 1rem; }
-            .radio-group { flex-direction: column; gap: 0.8rem; }
+            .radio-group { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; }
             .submit-btn { width: 100%; padding: 0.9rem; }
 
             /* --- Section titles --- */
