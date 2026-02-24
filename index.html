@@ -524,6 +524,8 @@
         .timeline-item:nth-child(1) { animation-delay: 0.1s; }
         .timeline-item:nth-child(2) { animation-delay: 0.2s; }
         .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
         
         @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -722,19 +724,50 @@
             <div class="container">
                 <h2 class="section-title">Ablauf des Tages</h2>
                 <div class="timeline">
+                    <!-- 1. Sektempfang — links -->
                     <div class="timeline-item">
-                        <div class="timeline-content-wrapper"><h3>Trauung</h3><p class="timeline-time">15:00 Uhr</p></div>
+                        <div class="timeline-content-wrapper">
+                            <h3>Sektempfang</h3>
+                            <p class="timeline-time">16:00 Uhr</p>
+                            <p>Eintreffen der Gäste</p>
+                        </div>
                         <div class="timeline-icon"><img src="images/Wedding.svg" style="width: 40px;"></div>
                         <div class="timeline-spacer"></div>
                     </div>
+                    <!-- 2. Freie Trauung — rechts -->
                     <div class="timeline-item">
                         <div class="timeline-spacer"></div>
-                        <div class="timeline-icon"><img src="images/Dinner.svg" style="width: 40px;"></div>
-                        <div class="timeline-content-wrapper"><h3>Dinner</h3><p class="timeline-time">18:30 Uhr</p></div>
+                        <div class="timeline-icon"><img src="images/Wedding.svg" style="width: 40px;"></div>
+                        <div class="timeline-content-wrapper">
+                            <h3>Freie Trauung</h3>
+                            <p class="timeline-time">16:30 Uhr</p>
+                        </div>
                     </div>
+                    <!-- 3. Essen — links -->
                     <div class="timeline-item">
-                        <div class="timeline-content-wrapper"><h3>Party</h3><p class="timeline-time">21:00 Uhr</p></div>
+                        <div class="timeline-content-wrapper">
+                            <h3>Abendessen</h3>
+                            <p class="timeline-time">18:30 Uhr</p>
+                        </div>
+                        <div class="timeline-icon"><img src="images/Dinner.svg" style="width: 40px;"></div>
+                        <div class="timeline-spacer"></div>
+                    </div>
+                    <!-- 4. Hochzeitstanz — rechts -->
+                    <div class="timeline-item">
+                        <div class="timeline-spacer"></div>
                         <div class="timeline-icon"><img src="images/Music.svg" style="width: 40px;"></div>
+                        <div class="timeline-content-wrapper">
+                            <h3>Hochzeitstanz</h3>
+                            <p class="timeline-time">22:00 Uhr</p>
+                        </div>
+                    </div>
+                    <!-- 5. Mitternachtssnack — links -->
+                    <div class="timeline-item">
+                        <div class="timeline-content-wrapper">
+                            <h3>Mitternachtssnack</h3>
+                            <p class="timeline-time">23:00 Uhr</p>
+                        </div>
+                        <div class="timeline-icon"><img src="images/Dinner.svg" style="width: 40px;"></div>
                         <div class="timeline-spacer"></div>
                     </div>
                 </div>
