@@ -581,30 +581,132 @@
         footer { text-align: center; padding: 5rem 0 3rem; font-size: 0.9rem; position: relative; }
         footer .hearts { font-size: 1.5rem; margin-bottom: 0.5rem; }
 
+        /* =============================================
+           TABLET (max 968px)
+        ============================================= */
         @media (max-width: 968px) {
-            .location-content { grid-template-columns: 1fr; gap: 3rem; }
+            .location-content { grid-template-columns: 1fr; gap: 2rem; }
             .location-text { padding-right: 0; }
-            .location-image { height: 300px; }
-            .location-map-full { height: 350px; }
+            .location-image { height: 280px; }
+            .location-map-full { height: 320px; }
             .color-palette { gap: 1rem; }
             .color-swatch { width: 60px; height: 60px; }
+            .trauzeugen-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         }
 
+        /* =============================================
+           MOBILE (max 768px)
+        ============================================= */
         @media (max-width: 768px) {
-            .envelope-scene { max-width: 88vw; }
-            .intro-heading { font-size: 2.5rem; }
-            .intro-text { font-size: 1.2rem; }
-            .timeline::before { left: 40px; }
-            .timeline-item { grid-template-columns: auto 1fr; gap: 1.5rem; }
+
+            /* --- Envelope / Password Screen --- */
+            .envelope-scene { max-width: 92vw; }
+            #password-screen { padding-top: 38vh; overflow: hidden; }
+
+            /* --- General sections --- */
+            section { padding: 4rem 0 6rem 0; }
+            .container { padding: 0 1.2rem; }
+
+            /* --- Hero --- */
+            .hero-content { padding: 1rem; }
+            .countdown { gap: 1rem; }
+            .countdown-item { min-width: 60px; }
+
+            /* --- Intro --- */
+            .intro-section { padding: 5rem 0 5rem 0; }
+            .intro-heading { font-size: 2.2rem; }
+            .intro-text { font-size: 1.05rem; line-height: 1.7; }
+
+            /* --- Timeline: collapse to single column --- */
+            .timeline { padding: 2rem 0; }
+            .timeline::before { left: 28px; top: 0; bottom: 0; }
+            .timeline-item {
+                grid-template-columns: 56px 1fr;
+                gap: 1rem;
+                margin-bottom: 2.5rem;
+            }
             .timeline-item:nth-child(odd) .timeline-content-wrapper,
-            .timeline-item:nth-child(even) .timeline-content-wrapper { grid-column: 2; text-align: left; }
+            .timeline-item:nth-child(even) .timeline-content-wrapper {
+                grid-column: 2;
+                text-align: left;
+            }
             .timeline-item:nth-child(odd) .timeline-icon,
-            .timeline-item:nth-child(even) .timeline-icon { grid-column: 1; }
+            .timeline-item:nth-child(even) .timeline-icon {
+                grid-column: 1;
+                width: 56px;
+                height: 56px;
+                font-size: 1.4rem;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 8px #1a3a52;
+            }
+            .timeline-item:nth-child(odd) .timeline-icon img,
+            .timeline-item:nth-child(even) .timeline-icon img { width: 28px !important; }
             .timeline-spacer { display: none; }
-            section { padding: 4rem 0 7rem 0; }
-            .trauzeugen-grid { grid-template-columns: 1fr; }
-            .faq-question { font-size: 1.1rem; }
-            .faq-answer { font-size: 0.95rem; }
+            .timeline-content-wrapper h3 { font-size: 1.3rem; }
+            .timeline-time { font-size: 0.9rem; }
+
+            /* --- Location --- */
+            .location-container { padding: 0 1.2rem; }
+            .location-content { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+            .location-image { height: 220px; }
+            .location-map-full { height: 260px; }
+            .location-description { font-size: 1rem; }
+            .location-details h4 { font-size: 1.1rem; }
+            .location-details p { font-size: 1rem; }
+            .maps-button { padding: 0.8rem 1.8rem; font-size: 1rem; }
+
+            /* --- Dresscode --- */
+            .dresscode-text { font-size: 1rem; }
+            .color-palette { gap: 0.8rem; }
+            .color-swatch { width: 52px; height: 52px; }
+
+            /* --- Trauzeugen --- */
+            .trauzeugen-grid { grid-template-columns: 1fr; gap: 2rem; max-width: 320px; }
+            .trauzeuge-image { width: 130px; height: 130px; }
+            .trauzeuge-name { font-size: 1.4rem; }
+
+            /* --- FAQ --- */
+            .faq-container { padding: 0 1rem; }
+            .faq-question { font-size: 1rem; }
+            .faq-answer { font-size: 0.9rem; padding: 0 1.2rem 1.2rem; }
+            .faq-question-wrapper { padding: 1.2rem 1.2rem; }
+
+            /* --- RSVP Form --- */
+            .rsvp-form { padding: 1.5rem 1rem; }
+            .radio-group { flex-direction: column; gap: 0.8rem; }
+            .submit-btn { width: 100%; padding: 0.9rem; }
+
+            /* --- Section titles --- */
+            .section-title { font-size: clamp(2.2rem, 8vw, 3.5rem); margin-bottom: 2rem; }
+
+            /* --- Footer --- */
+            footer { padding: 4rem 1rem 2rem; }
+        }
+
+        /* =============================================
+           SMALL MOBILE (max 480px)
+        ============================================= */
+        @media (max-width: 480px) {
+            .envelope-scene { max-width: 96vw; }
+            #password-screen { padding-top: 35vh; }
+
+            .hero-names { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+            .hero-date { font-size: clamp(1.4rem, 5vw, 2rem); margin-bottom: 1.5rem; }
+            .countdown { gap: 0.6rem; }
+            .countdown-number { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+            .countdown-text { font-size: 0.7rem; }
+
+            .intro-heading { font-size: 1.9rem; }
+            .intro-text { font-size: 0.95rem; }
+
+            .location-image { height: 180px; }
+            .location-map-full { height: 220px; }
+
+            .color-swatch { width: 44px; height: 44px; }
+
+            .card-names { font-size: 1.3rem; }
+            .card-date { font-size: 0.9rem; }
+            .password-input { font-size: 0.9rem; padding: 0.65rem 1rem; }
+            .password-submit { font-size: 0.9rem; padding: 0.65rem 1rem; }
         }
     </style>
 </head>
