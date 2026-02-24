@@ -233,6 +233,7 @@
             line-height: 1.2;
         }
 
+        .card-bride     { color: var(--flamingo); }
         .card-ampersand { color: var(--gold); font-style: italic; }
         .card-groom     { color: var(--azure); }
 
@@ -687,7 +688,8 @@
         ============================================= */
         @media (max-width: 480px) {
             .envelope-scene { max-width: 96vw; }
-            #password-screen { padding-top: 35vh; }
+            #password-screen { padding-top: 38vh; }
+            .envelope-wrap.open .card { transform: translateY(-92%); }
 
             .hero-names { font-size: clamp(2.2rem, 10vw, 3.5rem); }
             .hero-date { font-size: clamp(1.4rem, 5vw, 2rem); margin-bottom: 1.5rem; }
@@ -724,7 +726,7 @@
                 <div class="card" id="envelopeCard">
                     <div class="card-content" id="cardContent">
                         <h1 class="card-names">
-                            Ngọc Anh <span class="card-ampersand">&</span> <span class="card-groom">Anh Tuấn</span>
+                            <span class="card-bride">Ngọc Anh</span> <span class="card-ampersand">&</span> <span class="card-groom">Anh Tuấn</span>
                         </h1>
                         <p class="card-date">20. Juni 2026</p>
                         <div class="card-divider"></div>
