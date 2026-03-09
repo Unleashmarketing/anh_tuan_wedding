@@ -52,7 +52,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Push scene down so card (which rises up) lands in screen center */
             padding-top: 42vh;
             z-index: 9999;
             transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -74,7 +73,6 @@
             visibility: hidden;
         }
 
-        /* Scene wrapper */
         .envelope-scene {
             position: relative;
             width: 480px;
@@ -90,39 +88,20 @@
             to   { opacity: 1; transform: translateY(0)    scale(1);   }
         }
 
-        /*
-         * ENVELOPE STRUCTURE
-         * ─────────────────────────────────────────
-         *  .envelope-wrap  — outer container, sets size via padding-bottom trick
-         *    .card          — white card, z-index 1 (lowest)
-         *    .flap-south    — bottom triangle,  z-index 3 (always on top)
-         *    .flap-west     — left  triangle,   z-index 3
-         *    .flap-east     — right triangle,   z-index 3
-         *    .flap-north    — top   triangle,   z-index 4 closed → z-index 2 open
-         *    .envelope-seal — wax seal,         z-index 5
-         *
-         *  The north flap ROTATES around its top edge (transform-origin: top).
-         *  While closed it sits above the card. When open it flips back,
-         *  and because z-index drops below the card the card appears on top.
-         * ─────────────────────────────────────────
-         */
-
         .envelope-wrap {
             position: relative;
             width: 100%;
-            padding-bottom: 66%;   /* aspect ratio ~3:2 */
+            padding-bottom: 66%;
             filter: drop-shadow(0 25px 50px rgba(0,0,0,0.45));
             cursor: pointer;
         }
 
-        /* All direct children fill the same box */
         .envelope-wrap > * {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
         }
 
-        /* ── WHITE CARD ── */
         .card {
             background: linear-gradient(160deg, #fffdf9 0%, #fff8f0 100%);
             border-radius: 6px;
@@ -134,69 +113,60 @@
             padding: 2rem 1.8rem 1.6rem;
             overflow: hidden;
             transform: translateY(0%);
-            /* transform delays 0.5s (flap opens first), z-index flips at 0.45s when flap passes 90° */
             transition: transform 1s cubic-bezier(0.34, 1.3, 0.64, 1) 0.5s,
                         z-index 0s linear 0.45s;
         }
 
-        /* Card slides up out of envelope after flap opens */
         .envelope-wrap.open .card {
             transform: translateY(-75%);
-            z-index: 3;  /* above north flap (z-index 2) once it has flipped back */
+            z-index: 3;
         }
 
-
-
-        /* ── SOUTH FLAP (bottom triangle) ── always on top of card */
         .flap-south {
             z-index: 3;
             background: linear-gradient(170deg, #f0a0bc 0%, #e08aaa 100%);
             clip-path: polygon(0% 100%, 50% 44%, 100% 100%);
         }
 
-        /* ── WEST FLAP (left triangle) ── always on top of card */
         .flap-west {
             z-index: 3;
             background: linear-gradient(135deg, #ffc8d8 0%, #ffaac4 100%);
             clip-path: polygon(0% 0%, 0% 100%, 50% 44%);
         }
 
-        /* ── EAST FLAP (right triangle) ── always on top of card */
         .flap-east {
             z-index: 3;
             background: linear-gradient(225deg, #ffb8cc 0%, #ffa0bc 100%);
             clip-path: polygon(100% 0%, 50% 44%, 100% 100%);
         }
 
-        /* ── NORTH FLAP (top triangle / lid) ── */
         .flap-north {
-            z-index: 4;                          /* above card when CLOSED */
+            z-index: 4;
             background: linear-gradient(175deg, #ff8fb5 0%, #ff6b9d 60%, #e5568a 100%);
             clip-path: polygon(0% 0%, 50% 56%, 100% 0%);
             transform-origin: top center;
             transform: rotateX(0deg);
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-                        z-index 0s linear 0.45s;   /* z-index flips at halfway point */
+                        z-index 0s linear 0.45s;
         }
 
-        /* ── OPEN STATE ── */
         .envelope-wrap.open .flap-north {
             transform: rotateX(180deg);
-            z-index: 2;   /* now BELOW the card so card appears on top */
+            z-index: 2;
         }
 
-        /* ── WAX SEAL ── */
+        /* WAX SEAL — CI blue tone */
         .envelope-seal {
-            background: radial-gradient(circle at 35% 35%, #e8c84a 0%, #cda72e 50%, #a8831a 100%);
+            background: radial-gradient(circle at 35% 35%, #6dbfff 0%, #4baaff 50%, #2d8fd4 100%);
             border-radius: 50%;
             z-index: 5;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
+            color: #fff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 3px rgba(255,255,255,0.4);
             transition: opacity 0.35s ease, transform 0.35s ease;
-            /* Exact center of envelope */
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;
@@ -210,7 +180,6 @@
             transform: translate(-50%, -50%) scale(0.4);
         }
 
-        /* ── CARD CONTENT ── */
         .card-content {
             width: 100%;
             opacity: 0;
@@ -320,7 +289,6 @@
 
         .password-error.show { opacity: 1; }
 
-        /* Hint below envelope */
         .envelope-hint {
             margin-top: 1.8rem;
             color: rgba(255,179,198,0.75);
@@ -343,7 +311,6 @@
             50%      { opacity: 1;    transform: translateY(-3px); }
         }
 
-        /* Floating hearts */
         .floating-hearts {
             position: absolute;
             inset: 0;
@@ -364,7 +331,7 @@
             100% { opacity: 0;   transform: translateY(-8vh)  rotate(360deg) scale(1.1); }
         }
 
-                @keyframes shake {
+        @keyframes shake {
             0%, 100% { transform: translateX(0); }
             20% { transform: translateX(-8px); }
             40% { transform: translateX(8px); }
@@ -382,7 +349,6 @@
 
         #main-content.visible { opacity: 1; }
 
-        /* All animations in main-content are paused until .ready is added after password */
         #main-content:not(.ready) *,
         #main-content:not(.ready) .hero-names,
         #main-content:not(.ready) .hero-date,
@@ -610,26 +576,16 @@
            MOBILE (max 768px)
         ============================================= */
         @media (max-width: 768px) {
-
-            /* --- Envelope / Password Screen --- */
             .envelope-scene { max-width: 92vw; }
             #password-screen { padding-top: 38vh; overflow: hidden; }
-
-            /* --- General sections --- */
             section { padding: 4rem 0 6rem 0; }
             .container { padding: 0 1.2rem; }
-
-            /* --- Hero --- */
             .hero-content { padding: 1rem; }
             .countdown { gap: 1rem; }
             .countdown-item { min-width: 60px; }
-
-            /* --- Intro --- */
             .intro-section { padding: 5rem 0 5rem 0; }
             .intro-heading { font-size: 2.2rem; }
             .intro-text { font-size: 1.05rem; line-height: 1.7; }
-
-            /* --- Timeline: collapse to single column --- */
             .timeline { padding: 2rem 0; }
             .timeline::before { left: 28px; top: 0; bottom: 0; }
             .timeline-item {
@@ -659,8 +615,6 @@
             .timeline-spacer { display: none; }
             .timeline-content-wrapper h3 { font-size: 1.3rem; }
             .timeline-time { font-size: 0.9rem; }
-
-            /* --- Location --- */
             .location-container { padding: 0 1.2rem; }
             .location-content { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
             .location-image { height: 220px; }
@@ -669,39 +623,27 @@
             .location-details h4 { font-size: 1.1rem; }
             .location-details p { font-size: 1rem; }
             .maps-button { padding: 0.8rem 1.8rem; font-size: 1rem; }
-
-            /* --- Dresscode --- */
             .dresscode-text { font-size: 1rem; }
             .color-palette {
                 gap: 0.8rem;
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 justify-items: center;
-                max-width: 240px;
+                max-width: 300px;
                 margin: 0 auto;
             }
             .color-swatch { width: 52px; height: 52px; }
-
-            /* --- Trauzeugen --- */
             .trauzeugen-grid { grid-template-columns: 1fr; gap: 2rem; max-width: 320px; }
             .trauzeuge-image { width: 130px; height: 130px; }
             .trauzeuge-name { font-size: 1.4rem; }
-
-            /* --- FAQ --- */
             .faq-container { padding: 0 1rem; }
             .faq-question { font-size: 1rem; }
             .faq-answer { font-size: 0.9rem; padding: 0 1.2rem 1.2rem; }
             .faq-question-wrapper { padding: 1.2rem 1.2rem; }
-
-            /* --- RSVP Form --- */
             .rsvp-form { padding: 1.5rem 1rem; }
             .radio-group { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; }
             .submit-btn { width: 100%; padding: 0.9rem; }
-
-            /* --- Section titles --- */
             .section-title { font-size: clamp(2.2rem, 8vw, 3.5rem); margin-bottom: 2rem; }
-
-            /* --- Footer --- */
             footer { padding: 4rem 1rem 2rem; }
         }
 
@@ -712,21 +654,16 @@
             .envelope-scene { max-width: 96vw; }
             #password-screen { padding-top: 38vh; }
             .envelope-wrap.open .card { transform: translateY(-92%); }
-
             .hero-names { font-size: clamp(2.2rem, 10vw, 3.5rem); }
             .hero-date { font-size: clamp(1.4rem, 5vw, 2rem); margin-bottom: 1.5rem; }
             .countdown { gap: 0.6rem; }
             .countdown-number { font-size: clamp(1.8rem, 7vw, 2.5rem); }
             .countdown-text { font-size: 0.7rem; }
-
             .intro-heading { font-size: 1.9rem; }
             .intro-text { font-size: 0.95rem; }
-
             .location-image { height: 180px; }
             .location-map-full { height: 220px; }
-
             .color-swatch { width: 44px; height: 44px; }
-
             .card-names { font-size: 1.3rem; }
             .card-date { font-size: 0.9rem; }
             .password-input { font-size: 0.9rem; padding: 0.65rem 1rem; }
@@ -744,7 +681,6 @@
 
             <div class="envelope-wrap" id="envelopeWrap">
 
-                <!-- 1. White card: z-index 1, always at the bottom of the stack -->
                 <div class="card" id="envelopeCard">
                     <div class="card-content" id="cardContent">
                         <h1 class="card-names">
@@ -771,19 +707,12 @@
                     </div>
                 </div>
 
-                <!-- 2. South flap: z-index 3, always above card -->
                 <div class="flap-south"></div>
-
-                <!-- 3. West flap: z-index 3, always above card -->
                 <div class="flap-west"></div>
-
-                <!-- 4. East flap: z-index 3, always above card -->
                 <div class="flap-east"></div>
-
-                <!-- 5. North flap (lid): z-index 4 closed → z-index 2 open -->
                 <div class="flap-north"></div>
 
-                <!-- 6. Wax seal: z-index 5 -->
+                <!-- Wax seal in CI blue -->
                 <div class="envelope-seal">♥</div>
 
             </div><!-- end .envelope-wrap -->
@@ -793,7 +722,7 @@
         </div>
     </div>
 
-        <!-- Main Content -->
+    <!-- Main Content -->
     <div id="main-content">
         <section class="hero bg-blue">
             <img src="images/Tuan -Anh2403.JPG" alt="Wedding" class="hero-image">
@@ -818,7 +747,8 @@
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
             <div class="container">
                 <p class="intro-heading">Ein himmlisches Paar</p>
-                <p class="intro-text">Wir freuen uns riesig, euch zu unserer Hochzeit am 20. Juni 2026 einzuladen! Es wäre wunderschön, wenn ihr dabei seid, wenn wir uns unser Ja-Wort geben und gemeinsam mit Familie und Freunden diesen besonderen Tag feiern.</p>
+                <!-- UPDATED intro text -->
+                <p class="intro-text">Manche Augenblicke im Leben gewinnen erst durch die Menschen an Bedeutung, mit denen man sie teilt. Es wäre uns eine große Freude, euch dabei zu haben, wenn wir uns das Ja-Wort an unserem Hochzeitstag am 20. Juni 2026 geben. Im Kreise der Familie und engster Freunde wollen wir gemeinsam feiern und diesen Tag unvergesslich werden lassen.</p>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
         </section>
@@ -828,7 +758,6 @@
             <div class="container">
                 <h2 class="section-title">Ablauf des Tages</h2>
                 <div class="timeline">
-                    <!-- 1. Sektempfang — links -->
                     <div class="timeline-item">
                         <div class="timeline-content-wrapper">
                             <h3>Sektempfang</h3>
@@ -838,7 +767,6 @@
                         <div class="timeline-icon"><img src="images/Wedding.svg" style="width: 40px;"></div>
                         <div class="timeline-spacer"></div>
                     </div>
-                    <!-- 2. Freie Trauung — rechts -->
                     <div class="timeline-item">
                         <div class="timeline-spacer"></div>
                         <div class="timeline-icon"><img src="images/Wedding.svg" style="width: 40px;"></div>
@@ -847,7 +775,6 @@
                             <p class="timeline-time">16:30 Uhr</p>
                         </div>
                     </div>
-                    <!-- 3. Essen — links -->
                     <div class="timeline-item">
                         <div class="timeline-content-wrapper">
                             <h3>Abendessen</h3>
@@ -856,7 +783,6 @@
                         <div class="timeline-icon"><img src="images/Dinner.svg" style="width: 40px;"></div>
                         <div class="timeline-spacer"></div>
                     </div>
-                    <!-- 4. Hochzeitstanz — rechts -->
                     <div class="timeline-item">
                         <div class="timeline-spacer"></div>
                         <div class="timeline-icon"><img src="images/Music.svg" style="width: 40px;"></div>
@@ -865,7 +791,6 @@
                             <p class="timeline-time">22:00 Uhr</p>
                         </div>
                     </div>
-                    <!-- 5. Mitternachtssnack — links -->
                     <div class="timeline-item">
                         <div class="timeline-content-wrapper">
                             <h3>Mitternachtssnack</h3>
@@ -911,12 +836,18 @@
             <div class="container">
                 <h2 class="section-title">Dresscode</h2>
                 <div class="dresscode-box">
-                    <p class="dresscode-text">Der Dresscode ist festlich elegant. Solltet ihr Inspiration brauchen haben wir hier eine Farbpalette zusammengestellt:</p>
+                    <!-- FIXED: comma after "elegant" -->
+                    <p class="dresscode-text">Der Dresscode ist festlich elegant. Solltet ihr Inspiration brauchen, haben wir hier eine Farbpalette zusammengestellt:</p>
                     <div class="color-palette">
+                        <!-- Original 6 swatches -->
                         <div class="color-swatch" style="background: #FFC0CB;"></div>
                         <div class="color-swatch" style="background: #E6739F;"></div>
+                        <!-- NEW: darker pink -->
+                        <div class="color-swatch" style="background: #C0426E;"></div>
                         <div class="color-swatch" style="background: #B0C4DE;"></div>
                         <div class="color-swatch" style="background: #4682B4;"></div>
+                        <!-- NEW: darker blue -->
+                        <div class="color-swatch" style="background: #1a3a52;"></div>
                         <div class="color-swatch" style="background: #C0C0C0;"></div>
                         <div class="color-swatch" style="background: #F5F5DC;"></div>
                     </div>
@@ -972,15 +903,19 @@
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
             <div class="faq-container">
                 <h2 class="section-title">FAQ</h2>
+
+                <!-- FAQ 1: Geschenke — updated wording -->
                 <div class="faq-item">
                     <div class="faq-question-wrapper">
                         <h3 class="faq-question">Was soll ich schenken?</h3>
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer-wrapper">
-                        <p class="faq-answer">Eure Anwesenheit ist das schönste Geschenk für uns! Falls ihr uns dennoch etwas schenken möchtet, würden wir uns über einen Beitrag zu unserer Hochzeitsreise freuen. Ein kleiner Umschlag ist herzlich willkommen, aber keinesfalls verpflichtend.</p>
+                        <p class="faq-answer">Eure Anwesenheit ist das schönste Geschenk, das wir uns wünschen können! Wenn ihr uns dennoch etwas schenken möchtet, würden wir uns sehr über einen kleinen Beitrag zu unserer Hochzeitsreise freuen – ein Umschlag ist herzlich willkommen, aber selbstverständlich kein Muss.</p>
                     </div>
                 </div>
+
+                <!-- FAQ 2: Anfahrt -->
                 <div class="faq-item">
                     <div class="faq-question-wrapper">
                         <h3 class="faq-question">Wie komme ich am Besten zur Location?</h3>
@@ -990,6 +925,18 @@
                         <p class="faq-answer">Wir empfehlen die Anreise mit dem Auto, da das Gasthaus etwas abgelegen in der Natur liegt und mit öffentlichen Verkehrsmitteln schwer zu erreichen ist. Keine Sorge – ausreichend Parkplätze sind direkt vor Ort vorhanden!</p>
                     </div>
                 </div>
+
+                <!-- FAQ 3: NEW — Zusage bis wann -->
+                <div class="faq-item">
+                    <div class="faq-question-wrapper">
+                        <h3 class="faq-question">Bis wann muss ich mich an- oder abmelden?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer-wrapper">
+                        <p class="faq-answer">Wir würden uns freuen, bis Mitte Mai von euch zu hören, damit wir alles in Ruhe planen können. Falls sich kurzfristig etwas ändert oder ihr Fragen habt, sprecht uns jederzeit gerne an – wir sind immer für euch da!</p>
+                    </div>
+                </div>
+
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
         </section>
@@ -1067,7 +1014,6 @@
             setTimeout(() => heart.remove(), 22000);
         }
 
-        // Start hearts
         for (let i = 0; i < 6; i++) setTimeout(createHeart, i * 500);
         setInterval(createHeart, 1400);
 
@@ -1083,13 +1029,9 @@
             if (envelopeOpened) return;
             envelopeOpened = true;
 
-            // Hide hint
             envelopeHint.classList.add('hidden');
-
-            // Open: north flap rotates back, z-index swaps at halfway (0.45s)
             envelopeWrap.classList.add('open');
 
-            // Show card content after flap opens + card slides up (~1.6s total)
             setTimeout(() => {
                 cardContent.classList.add('visible');
                 setTimeout(() => {
@@ -1107,9 +1049,6 @@
         const passwordInput = document.getElementById('password-input');
         const passwordSubmit = document.getElementById('password-submit');
         const passwordError = document.getElementById('password-error');
-
-        // Already authenticated?
-        // sessionStorage check runs after all JS is initialized (see bottom of script)
 
         function checkPassword() {
             if (passwordInput.value === correctPassword) {
@@ -1201,7 +1140,7 @@
         updateCountdown();
 
         // =============================================
-        // SESSION CHECK — runs here so initAnimations() is already defined
+        // SESSION CHECK
         // =============================================
         if (sessionStorage.getItem('authenticated') === 'true') {
             passwordScreen.classList.add('hidden');
@@ -1210,13 +1149,11 @@
         }
 
         // =============================================
-        // INTERSECTION OBSERVER — only starts after password
+        // INTERSECTION OBSERVER
         // =============================================
         function initAnimations() {
-            // Mark main content as ready — CSS :not(.ready) pause rule lifts
             mainContent.classList.add('ready');
 
-            // IntersectionObserver for scroll-triggered elements
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(e => {
                     if (e.isIntersecting) {
