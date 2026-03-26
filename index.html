@@ -25,8 +25,21 @@
             --gold: #cda72e;
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        /* =============================================
+           RESET & BASE
+        ============================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Prevent any element from causing horizontal overflow */
+        html {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Playfair Display', serif;
             background: #1a3a52;
@@ -34,6 +47,12 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            max-width: 100%;
+        }
+
+        /* Global safeguard against overflow */
+        img, iframe, video, embed, object {
+            max-width: 100%;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -155,7 +174,6 @@
             z-index: 2;
         }
 
-        /* WAX SEAL — CI blue tone */
         .envelope-seal {
             background: radial-gradient(circle at 35% 35%, #6dbfff 0%, #4baaff 50%, #2d8fd4 100%);
             border-radius: 50%;
@@ -380,7 +398,6 @@
         .divider-bottom { bottom: -1px; }
         .divider-top { top: -1px; transform: rotate(180deg); }
 
-        /* Clip dividers so they never cause horizontal scroll */
         section, .location-section, .faq-section, footer {
             overflow: hidden;
         }
@@ -544,7 +561,6 @@
         .faq-container { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
         .faq-item { background: rgba(255, 179, 198, 0.1); border: 2px solid rgba(255, 179, 198, 0.3); border-radius: 12px; margin-bottom: 1.5rem; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; overflow: hidden; transition: all 0.3s ease; }
         .faq-question-wrapper { padding: 1.5rem 2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
-
         .faq-question { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: #1a3a52; margin: 0; }
         .faq-toggle { font-size: 1.5rem; color: var(--flamingo); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 1rem; }
         .faq-item.active .faq-toggle { transform: rotate(45deg); }
@@ -552,13 +568,59 @@
         .faq-item.active .faq-answer-wrapper { max-height: 500px; }
         .faq-answer { font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.8; color: #666; padding: 0 2rem 1.5rem 2rem; }
 
+        /* =============================================
+           RSVP FORM
+        ============================================= */
         .rsvp-form { max-width: 700px; margin: 0 auto; padding: 3rem; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
         .form-group { margin-bottom: 1.5rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #ffb3c6; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.875rem 1rem; border: 2px solid rgba(255, 179, 198, 0.3); border-radius: 10px; font-family: 'Playfair Display', serif; font-size: 1rem; background: rgba(255, 255, 255, 0.95); }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid rgba(255, 179, 198, 0.3);
+            border-radius: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+        }
         .form-group textarea { min-height: 100px; resize: vertical; }
-        .radio-group { display: flex; gap: 2rem; margin-top: 0.5rem; }
-        .radio-option { display: flex; align-items: center; gap: 0.8rem; color: #ffb3c6; cursor: pointer; }
+
+        /* FIX: Radio group layout */
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            flex-shrink: 0;
+            accent-color: var(--flamingo);
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .radio-option label {
+            color: #ffb3c6;
+            cursor: pointer;
+            margin: 0;
+            line-height: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+        }
+
         .submit-btn { background: #ffb3c6; color: #1a3a52; border: none; padding: 1rem 3rem; font-size: 1.1rem; font-weight: 500; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-family: 'Playfair Display', serif; }
         .submit-btn:hover { background: #ff9eb8; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 179, 198, 0.4); }
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
@@ -650,7 +712,7 @@
             .faq-answer { font-size: 0.9rem; padding: 0 1.2rem 1.2rem; }
             .faq-question-wrapper { padding: 1.2rem 1.2rem; }
             .rsvp-form { padding: 1.5rem 1rem; }
-            .radio-group { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; }
+            .radio-group { gap: 1.5rem; }
             .submit-btn { width: 100%; padding: 0.9rem; }
             .section-title { font-size: clamp(2.2rem, 8vw, 3.5rem); margin-bottom: 2rem; }
             footer { padding: 4rem 1rem 2rem; }
@@ -722,7 +784,6 @@
                 <div class="flap-east"></div>
                 <div class="flap-north"></div>
 
-                <!-- Wax seal in CI blue -->
                 <div class="envelope-seal">♥</div>
 
             </div><!-- end .envelope-wrap -->
@@ -757,7 +818,6 @@
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-top">
             <div class="container">
                 <p class="intro-heading">Ein himmlisches Paar</p>
-                <!-- UPDATED intro text -->
                 <p class="intro-text">Manche Augenblicke im Leben gewinnen erst durch die Menschen an Bedeutung, mit denen man sie teilt. Es wäre uns eine große Freude, euch dabei zu haben, wenn wir uns das Ja-Wort an unserem Hochzeitstag am 20. Juni 2026 geben. Im Kreise der Familie und engster Freunde wollen wir gemeinsam feiern und diesen Tag unvergesslich werden lassen.</p>
             </div>
             <img src="images/glitzer.png" alt="Glitzer" class="section-divider divider-bottom">
@@ -846,17 +906,13 @@
             <div class="container">
                 <h2 class="section-title">Dresscode</h2>
                 <div class="dresscode-box">
-                    <!-- FIXED: comma after "elegant" -->
                     <p class="dresscode-text">Der Dresscode ist festlich elegant. Solltet ihr Inspiration brauchen, haben wir hier eine Farbpalette zusammengestellt:</p>
                     <div class="color-palette">
-                        <!-- Original 6 swatches -->
                         <div class="color-swatch" style="background: #FFC0CB;"></div>
                         <div class="color-swatch" style="background: #E6739F;"></div>
-                        <!-- NEW: darker pink -->
                         <div class="color-swatch" style="background: #C0426E;"></div>
                         <div class="color-swatch" style="background: #B0C4DE;"></div>
                         <div class="color-swatch" style="background: #4682B4;"></div>
-                        <!-- NEW: darker blue -->
                         <div class="color-swatch" style="background: #1a3a52;"></div>
                         <div class="color-swatch" style="background: #C0C0C0;"></div>
                         <div class="color-swatch" style="background: #F5F5DC;"></div>
@@ -908,7 +964,6 @@
             <div class="faq-container">
                 <h2 class="section-title">FAQ</h2>
 
-                <!-- FAQ 1: Geschenke — updated wording -->
                 <div class="faq-item">
                     <div class="faq-question-wrapper">
                         <h3 class="faq-question">Was soll ich schenken?</h3>
@@ -919,7 +974,6 @@
                     </div>
                 </div>
 
-                <!-- FAQ 2: Anfahrt -->
                 <div class="faq-item">
                     <div class="faq-question-wrapper">
                         <h3 class="faq-question">Wie komme ich am Besten zur Location?</h3>
@@ -930,7 +984,6 @@
                     </div>
                 </div>
 
-                <!-- FAQ 3: NEW — Zusage bis wann -->
                 <div class="faq-item">
                     <div class="faq-question-wrapper">
                         <h3 class="faq-question">Bis wann muss ich mich an- oder abmelden?</h3>
@@ -997,7 +1050,8 @@
         </footer>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // =============================================
         // FLOATING HEARTS BACKGROUND
         // =============================================
@@ -1173,14 +1227,5 @@
         }
     </script>
 
-    <style>
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-8px); }
-            40% { transform: translateX(8px); }
-            60% { transform: translateX(-5px); }
-            80% { transform: translateX(5px); }
-        }
-    </style>
 </body>
 </html>
